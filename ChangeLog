@@ -1,0 +1,12 @@
+2022-10-22 LdBeth <ldbeth@sdf.org>
+
+	* version.s: Change to "Version 6Δ".
+	* s8.p: Change `solve` to `cSolve` for AC analysis.
+	* ws.p: New helper program.
+	* list.s: Add `s\ws` to the list.
+	* Replaced various `expr("DelVar ...")` instances.
+
+Copyright 2014, The Symbulator team
+Copyright 2022-2023, LdBeth
+Copying and distribution of this file, with or without modification, are
+permitted provided the copyright notice and this notice are preserved.
