@@ -13,7 +13,7 @@ instring(ç,",",τξelo)-1→τξslo
 right(left(ç,τξslo),τξelg)→τξeds
 τξslo+1→τξflo
 
-expr("DelVar "&τξeds)
+DelVar #τξeds
 
 If instring("r,e,j,o,c,l,m,s,z,y,h,g,a,b,t",left(τξeds,1))=0 Then
 Dialog

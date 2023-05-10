@@ -6,6 +6,12 @@
 	* list.s: Add `s\ws` to the list.
 	* Replaced various `expr("DelVar ...")` instances.
 
+2023-05-10 LdBeth <ldbeth@sdf.org>
+
+	* s8.p: Fix the `cSolve` as suggested by Roberto Perez-Franco.
+	* bode.p, s1.p, th.p, tr.p: Replaced usage of `expr()` by `#`.
+
+Copyright 1998-2008, Roberto Perez-Franco
 Copyright 2014, The Symbulator team
 Copyright 2022-2023, LdBeth
 Copying and distribution of this file, with or without modification, are

@@ -13,7 +13,7 @@ Text "perform this task."
 EndDlog
 Return 
 EndIf
-expr("DelVar βtool")
+DelVar βtool
 "tr"→βtool
 s\s0(â,ω,µn1,µn2)
 If ok=3. Then
@@ -22,7 +22,7 @@ DispHome
 Return 
 EndIf
 s\s5(expr("["&û&"]"),1)
-expr("DelVar βtool")
+DelVar βtool
 s\s9()
 Disp "Elapsed: "&string(checkTmr(exact(s\ttr)))&" seconds."
 DelVar s\ttr,û,s\verbose

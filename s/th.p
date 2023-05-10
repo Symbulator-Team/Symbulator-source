@@ -12,10 +12,10 @@ exact(µn1)→µn1
 exact(µn2)→µn2
 EndIf
 
-expr("DelVar βtool")
+DelVar βtool
 "th"→βtool
 s\s0(â,ω,exact(µn1),exact(µn2))
-expr("DelVar βtool")
+DelVar βtool
 
 If ok=3. Then
 0.→ok
@@ -63,7 +63,7 @@ Disp "Please wait..."
 If δta=1 Then
 "dc"→βtool
 s\s5(expr("["&û&"]"),1)
-expr("DelVar βtool")
+DelVar βtool
 EndIf
 
 If δta=2 Then
@@ -77,13 +77,13 @@ EndIf
 expr(δω)→δω
 "ac"→βtool
 s\s5(expr("["&û&"]"),δω)
-expr("DelVar βtool")
+DelVar βtool
 EndIf
 
 If δta=3 Then
 "fd"→βtool
 s\s5(expr("["&û&"]"),1)
-expr("DelVar βtool")
+DelVar βtool
 EndIf
 
 If ok=4. Then
@@ -119,19 +119,19 @@ true→s\select
 If δta=1 Then
 "dc"→βtool
 s\s5(expr("["&û&"]"),1)
-expr("DelVar βtool")
+DelVar βtool
 EndIf
 
 If δta=2 Then
 "ac"→βtool
 s\s5(expr("["&û&"]"),δω)
-expr("DelVar βtool")
+DelVar βtool
 EndIf
 
 If δta=3 Then
 "fd"→βtool
 s\s5(expr("["&û&"]"),1)
-expr("DelVar βtool")
+DelVar βtool
 EndIf
 
 If ok=4. Then

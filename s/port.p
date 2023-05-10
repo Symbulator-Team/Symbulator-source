@@ -118,7 +118,7 @@ EndIf
 If δta=3 Then
 "fd"→βtool
 s\s5(expr("["&û&"]"),1)
-expr("DelVar βtool")
+DelVar βtool
 EndIf
 If ok=4. Then
 Return 

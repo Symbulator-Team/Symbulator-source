@@ -223,7 +223,7 @@ EndIf
 EndFor
 If βtool="fd" or βtool="tr" Then
 expr("solve((v"&αζ2&"-v"&αζ3&")/(s)=("&αζ4&")*(i"&αζ1&"-("&αζ5&")/s)+("&ζζ&"),i"&αζ1&")→eq"&αζ1)
-Else
+ElseIf βtool="ac" Then
 expr("cSolve((v"&αζ2&"-v"&αζ3&")/(ω*)=("&αζ4&")*(i"&αζ1&")+("&ζζ&"),i"&αζ1&")→eq"&αζ1)
 EndIf
 αeql&"eq"&αζ1&" and "→αeql

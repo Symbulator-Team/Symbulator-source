@@ -31,7 +31,7 @@ EndDlog
 If ok=0. Then
 Return 
 EndIf
-If not (expr(Πi)>0) Then
+If not (#Πi>0) Then
 Dialog
 Title "Notice!"
 Text "Minimal frequency can't be"
@@ -39,8 +39,8 @@ Text "0. Please, enter it again."
 EndDlog
 Goto reenter
 EndIf
-expr("log("&Πi&")")→xmin
-If not (expr(Πi)<expr(Πo)) Then
+log(#Πi)→xmin
+If not (#Πi<#Πo) Then
 Dialog
 Title "Notice!"
 Text "Minimal frequency must be"
@@ -49,11 +49,11 @@ Text "Please, enter them again."
 EndDlog
 Goto reenter
 EndIf
-expr("log("&Πo&")")→xmax
+log(#Πo)→xmax
 (xmax-xmin)/10→xscl
-expr("DelVar "&Πv)
+DelVar #Πv
 If Πt=1 and Πx=1 Then
-expr("Define y1(x)=(20*log(abs("&Πf&")))|"&Πv&"=*10^(x)")
+Define y1(x)=(20*log(abs(#Πf)))|#Πv=*10^(x)
 setMode("Split Screen","FULL")
 Dialog
 Title "Axis units"
@@ -66,7 +66,7 @@ EndIf
 PlotsOff :PlotsOn 1:ZoomFit
 EndIf
 If Πt=1 and Πx=2 Then
-expr("Define y1(x)=(20*log(abs("&Πf&")))|"&Πv&"=*10^(x)*(2*π)")
+Define y1(x)=(20*log(abs(#Πf)))|#Πv=*10^(x)*(2*π)
 setMode("Split Screen","FULL")
 Dialog
 Title "Axis units"
@@ -79,7 +79,7 @@ EndIf
 PlotsOff :PlotsOn 1:ZoomFit
 EndIf
 If Πt=2 and Πx=1 Then
-expr("Define y2(x)=angle("&Πf&")|"&Πv&"=*10^(x)")
+Define y2(x)=angle(#Πf)|#Πv=*10^(x)
 setMode("Split Screen","FULL")
 Dialog
 Title "Axis units"
@@ -92,7 +92,7 @@ EndIf
 PlotsOff :PlotsOn 1:ZoomFit
 EndIf
 If Πt=2 and Πx=2 Then
-expr("Define y2(x)=angle("&Πf&")|"&Πv&"=*10^(x)*(2*π)")
+Define y2(x)=angle(#Πf#)|#Πv=*10^(x)*(2*π)
 setMode("Split Screen","FULL")
 Dialog
 Title "Axis units"
@@ -115,12 +115,12 @@ EndDlog
 If ok=0. Then
 Return 
 EndIf
-switch(1):PlotsOff :PlotsOn 1:expr("Define y1(x)=(20*log(abs("&Πf&")))|"&Πv&"=*10^(x)"):ZoomFit
-switch(2):PlotsOff :PlotsOn 2:expr("Define y2(x)=angle("&Πf&")|"&Πv&"=*10^(x)"):ZoomFit
+switch(1):PlotsOff :PlotsOn 1:Define y1(x)=(20*log(abs(#Πf)))|#Πv=*10^(x):ZoomFit
+switch(2):PlotsOff :PlotsOn 2:Define y2(x)=angle(#Πf)|#Πv=*10^(x):ZoomFit
 EndIf
 If Πt=3 and Πx=2 Then
-expr("Define y1(x)=(20*log(abs("&Πf&")))|"&Πv&"=*10^(x)*(2*π)")
-expr("Define y2(x)=angle("&Πf&")|"&Πv&"=*10^(x)*(2*π)")
+Define y1(x)=(20*log(abs(#Πf)))|#Πv=*10^(x)*(2*π)
+Define y2(x)=angle(#Πf)|#Πv=*10^(x)*(2*π)
 setMode("Split Screen","TOP-BOTTOM"):setMode("Number of Graphs","2"):setMode("Graph 2","FUNCTION")
 Dialog
 Title "Axis units"
