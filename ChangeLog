@@ -11,6 +11,10 @@
 	* s8.p: Fix the `cSolve` as suggested by Roberto Perez-Franco.
 	* bode.p, s1.p, th.p, tr.p: Replaced usage of `expr()` by `#`.
 
+2023-05-11 LdBeth <ldbeth@sdf.org>
+
+	* s6.p: Add the missing file.
+
 Copyright 1998-2008, Roberto Perez-Franco
 Copyright 2014, The Symbulator team
 Copyright 2022-2023, LdBeth
