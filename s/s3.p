@@ -4,15 +4,6 @@ If ok=7 Then
 Return 
 EndIf
 
-If getType(s\si)≠"EXPR" Then
-false→s\si
-EndIf
-
-If s\si=true Then
-DelVar m,k,µ,n,p,f
-"|k=13 and m=1–3 and µ=1–6 and n=1–9 and p=1–12 and f=1–15"→σΓsi
-EndIf
-
 0→αζg
 0→αζn1
 0→αζn2
@@ -27,6 +18,7 @@ left(αζ1,1)→αζ11
 
 If αζ11="t" Then
 If αζ2="0" or αζ3="0" Then
+ClrIO
 Dialog
 Title "Notice!"
 Text "Ideal transformer"&αζ1&"'s"
@@ -40,6 +32,7 @@ EndIf
 
 If αζ2=αζ3 Then
 If αζ11≠"m" Then
+ClrIO
 Dialog
 Title "Notice!"
 Text "Both nodes of "&αζ1
@@ -52,6 +45,7 @@ EndIf
 
 ê[αζ,1]→αζω
 If getType(αζω)≠"VAR" Then
+ClrIO
 Dialog
 Title "Notice!"
 Text "The name of element #"&string(αζ)
@@ -76,6 +70,7 @@ EndIf
 
 If βtool="fd" and instring("e,j",αζ11)≠0 Then
 If αζ4≠string(ê[αζ,4]|t=0) Then
+ClrIO
 Dialog
 Title "Notice!"
 Text "In '"&βtool&"' analysis the value of '"&αζ1&"'"
@@ -90,6 +85,7 @@ EndFor
 
 If βtool="th" or βtool="po" Then
 If string(µn1)=string(µn2) Then
+ClrIO
 Dialog
 Title "Notice!"
 Text "Both nodes used as input"
@@ -99,6 +95,7 @@ EndDlog
 3→ok
 EndIf
 If αζn1=0 Then
+ClrIO
 Dialog
 Title "Notice!"
 Text "Circuit doesn't contain"
@@ -108,6 +105,7 @@ EndDlog
 3→ok
 EndIf
 If αζn2=0 Then
+ClrIO
 Dialog
 Title "Notice!"
 Text "Circuit doesn't contain"
@@ -118,6 +116,7 @@ EndDlog
 EndIf
 Else
 If αζg=0 Then
+ClrIO
 Dialog
 Title "Notice!"
 Text "Circuit must contain at"

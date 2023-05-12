@@ -44,6 +44,7 @@ dim(τξedm)→τξedd
 τξedd[2]→τξend
 If τξend≠τξnte Then
 τξedm[1,1]→τξedn
+ClrIO
 Dialog
 Title "Error in element description"
 Text "Element "&string(τξedn)&" is not properly described:"

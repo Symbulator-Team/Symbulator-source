@@ -3,8 +3,8 @@ Prgm
 If ok=7 Then
 Return 
 EndIf
-©=
 If right(left(string(getConfg()),14),12)≠"Product Name" Then
+ClrIO
 Dialog
 Title "Notice!"
 Text "Symbulator requires you to"
@@ -35,14 +35,10 @@ EndDlog
 3→ok
 Return 
 EndIf
-©=
-ClrIO
-Disp "         Symbulator"
-Disp s\version
-Disp ""
-Disp "Storing current modes."
+
+s\version()
+
 {getMode("Display Digits"),getMode("Exponential Format"),getMode("Exact/Approx"),getMode("Complex Format"),getMode("Angle"),getMode("Base")}→αζmode
-Disp "Setting new modes."
 setMode("Exact/Approx","AUTO")
 setMode("Complex Format","RECTANGULAR")
 setMode("Angle","RADIAN")
@@ -54,6 +50,34 @@ If getType(â)="STR" Then
 ":"&â→ç
 
 s\s1()
+
+©Prefixes
+If instring(ç,"'")≠0 Then
+s\sr("'k","*13")
+s\sr("'K","*13")
+s\sr("'M","*16")
+s\sr("'G","*19")
+s\sr("'T","*112")
+s\sr("'P","*115")
+s\sr("'E","*118")
+s\sr("'m","*1–3")
+s\sr("'µ","*1–6")
+s\sr("'n","*1–9")
+s\sr("'p","*1–12")
+s\sr("'f","*1–15")
+s\sr("'a","*1–18")
+If instring(ç,"'")≠0 Then
+ClrIO
+Dialog
+Title "Notice!"
+Text "Your circuit description uses some"
+Text "shorthand that Symbulator does not"
+Text "recognize. Please fix that. Thanks!"
+EndDlog
+3→ok
+EndIf
+EndIf
+©
 
 If instring("fd,tr",βtool)≠0 Then
 s\s2("l",5)
@@ -101,6 +125,7 @@ s\s4(expr("["&û&"]"))
 DelVar çlen,ç,u
 
 Else
+ClrIO
 Dialog
 Title "Notice!"
 Text "Symbulator requires the"
@@ -112,6 +137,7 @@ EndDlog
 EndIf
 Else
 If getType(v0)="NUM" Then
+ClrIO
 Dialog
 Title "Notice!"
 Text "You've decided to skip the"

@@ -19,8 +19,14 @@
 
 	* bode.p: Fix typo.
 
+2023-05-12 Roberto Perez-Franco <roberto@perez-franco.com>
+
+	* Version 7 alpha: SI unit syntax is changed, s\pr(x,y) is
+	the new parallel resistance function.
+
 Copyright 1998-2008, Roberto Perez-Franco
 Copyright 2014, The Symbulator team
-Copyright 2022-2023, LdBeth
+Copyright 2022 LdBeth
+Copyright 2023 Roberto Perez-Franco, LdBeth
 Copying and distribution of this file, with or without modification, are
 permitted provided the copyright notice and this notice are preserved.

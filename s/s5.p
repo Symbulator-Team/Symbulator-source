@@ -15,6 +15,7 @@ dim(ê)→αszc
 
 For αζ,1,αnec
 string(ê[αζ,1])→αζ1
+left(αζ1,1)→αζ11
 string(ê[αζ,2])→αζ2
 string(ê[αζ,3])→αζ3
 string(ê[αζ,4])→αζ4
@@ -26,24 +27,6 @@ EndIf
 expr("DelVar Γζ"&αζ2)
 expr("DelVar Γζ"&αζ3)
 expr("DelVar eq"&αζ1)
-DelVar αζ11
-left(αζ1,1)→αζ11
-
-©SI Units 
-If s\si=true Then
-If instring("r,j,e,l,c",αζ11)≠0 Then
-expr("ê[αζ,4]"&σΓsi)→ê[αζ,4]
-EndIf
-EndIf
-
-©p(,)
-If instring("r",αζ11)≠0 Then
-If instring(αζ4,"p(")≠0 Then
-Define p(Ω1,Ω2)=Ω1*Ω2/(Ω1+Ω2)
-ê[αζ,4]→ê[αζ,4]
-DelVar p
-EndIf
-EndIf
 
 ©
 If βtool="tr" and instring("e,j",αζ11)≠0 Then

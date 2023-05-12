@@ -16,6 +16,7 @@ right(left(ç,τξslo),τξelg)→τξeds
 DelVar #τξeds
 
 If instring("r,e,j,o,c,l,m,s,z,y,h,g,a,b,t",left(τξeds,1))=0 Then
+ClrIO
 Dialog
 Title "Error with element name!"
 Text "The name of the "&τξeds&" element seems wrong:"
