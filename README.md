@@ -1,8 +1,8 @@
 # Symbulator for TI M86k series calculators
 
-This is plain text source code for Symbulator based on
-https://github.com/Symbulator-Team/TI-89 with minor bug fixes, and an
-additional function `ws()` that would create some helper functions.
+This is plain text source code for Symbulator.
+Documentation and TI Group file can be downloaded at https://www.symbulator.com
 
-This version is named `6Δ` to differentiate from `Version 6β - July 5 2014`
-in the original source.
+With Roberto Pérez-Franco the author of Symbulator we are pleased
+to announce version `7α`, a new update to Symbulator.
+
