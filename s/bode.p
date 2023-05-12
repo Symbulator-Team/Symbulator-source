@@ -92,7 +92,7 @@ EndIf
 PlotsOff :PlotsOn 1:ZoomFit
 EndIf
 If Πt=2 and Πx=2 Then
-Define y2(x)=angle(#Πf#)|#Πv=*10^(x)*(2*π)
+Define y2(x)=angle(#Πf)|#Πv=*10^(x)*(2*π)
 setMode("Split Screen","FULL")
 Dialog
 Title "Axis units"

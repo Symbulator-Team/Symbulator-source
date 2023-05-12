@@ -15,6 +15,10 @@
 
 	* s6.p: Add the missing file.
 
+2023-05-12 LdBeth <ldbeth@sdf.org>
+
+	* bode.p: Fix typo.
+
 Copyright 1998-2008, Roberto Perez-Franco
 Copyright 2014, The Symbulator team
 Copyright 2022-2023, LdBeth
