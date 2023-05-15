@@ -24,6 +24,11 @@
 	* Version 7 alpha: SI unit syntax is changed, s\pr(x,y) is
 	the new parallel resistance function.
 
+2023-05-15 Roberto Perez-Franco <roberto@perez-franco.com>
+
+	* Version 7 alpha-2: Changed expert and equivalent resistance
+	tools.
+
 Copyright 1998-2008, Roberto Perez-Franco
 Copyright 2014, The Symbulator team
 Copyright 2022 LdBeth

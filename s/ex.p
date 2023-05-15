@@ -23,7 +23,6 @@ If s\toa="TR" Then
 4→δta
 EndIf
 EndIf
-
 DelVar s\toa
 
 If getType(δta)="NONE" Then
@@ -32,7 +31,7 @@ Title "Expert Mode"
 DropDown "Type of Analysis",{"DC","AC","FD","TR"},δta
 EndDlog
 If ok=0. Then
-DelVar αpurpose
+DelVar αpurpose,δta
 Return 
 EndIf
 EndIf
@@ -40,7 +39,12 @@ EndIf
 If δta=1 Then
 s\dc(â)
 EndIf
+
 If δta=2 Then
+If getType(s\ω)="STR" Then
+s\ω→δω
+DelVar s\ω
+Else
 Dialog
 Title "Enter radial frequency"
 Request "ω in rad/s",δω
@@ -49,9 +53,12 @@ If ok=0. Then
 DelVar αpurpose
 Return 
 EndIf
+EndIf
+
 expr(δω)→δω
 s\ac(â,δω)
 EndIf
+
 If δta=3 Then
 s\fd(â)
 EndIf
@@ -59,7 +66,7 @@ If δta=4 Then
 s\tr(â)
 EndIf
 
-DelVar δta,û,s\verbose,newequ,newunk,αpurpose
+DelVar δta,δω,û,s\verbose,newequ,newunk,αpurpose
 Disp "Elapsed: "&string(checkTmr(exact(s\tex)))&" seconds."
 DelVar s\tex
 DispHome

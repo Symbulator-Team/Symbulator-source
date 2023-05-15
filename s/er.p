@@ -62,12 +62,18 @@ s\s5(expr("["&û&"]"),1)
 DelVar βtool
 EndIf
 If δta=2 Then
+If getType(s\ω)="STR" Then
+s\ω→δω
+DelVar s\ω
+Else
 Dialog
-Title "Radial frequency"
+Title "Enter radial frequency"
 Request "ω in rad/s",δω
 EndDlog
 If ok=0. Then
+DelVar αpurpose
 Return 
+EndIf
 EndIf
 expr(δω)→δω
 "jε1,"&µn2&","&µn1&",1,0;"&û→û
