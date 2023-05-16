@@ -32,6 +32,7 @@ EndIf
 ©=
 For αζ,1,αnec
 string(ê[αζ,1])→αζ1
+left(αζ1,1)→αζ11
 string(ê[αζ,2])→αζ2
 string(ê[αζ,3])→αζ3
 string(ê[αζ,4])→αζ4
@@ -40,7 +41,7 @@ If αncc<5 Then
 Else
 string(ê[αζ,5])→αζ5
 EndIf
-If left(αζ1,1)="z" or left(αζ1,1)="y" or left(αζ1,1)="g" or left(αζ1,1)="h" or left(αζ1,1)="a" or left(αζ1,1)="b" Then
+If inString("z,y,g,h,a,b",αζ11)≠0 Then
 s\s7(αζ1,αζ2,αζ3,αζ4,αζ5,ω)
 Else
 s\s8(ê,αζ1,αζ2,αζ3,αζ4,αζ5,ω)
@@ -49,8 +50,8 @@ EndFor
 dim(αuk1)-1→δζ1
 ©=
 string(αuk1)→αuk1α
-If getType(newunk)="STR" Then
-left(αuk1,δζ1)&","&newunk&"}"→αuk1
+If getType(s\newunk)="STR" Then
+left(αuk1,δζ1)&","&s\newunk&"}"→αuk1
 Else
 left(αuk1,δζ1)&"}"→αuk1
 EndIf
@@ -73,17 +74,18 @@ Disp "expressions."
 EndIf
 For αζ,1,αnec
 string(ê[αζ,1])→αζ1
+left(αζ1,1)→αζ11
 string(ê[αζ,2])→αζ2
 string(ê[αζ,3])→αζ3
 string(ê[αζ,4])→αζ4
-If inString("r,c,l,e,j",left(αζ1,1))≠0 Then
+If inString("r,c,l,e,j",αζ11)≠0 Then
 expr("((v"&αζ2&")-(v"&αζ3&"))*(conj(i"&αζ1&"))→s"&αζ1)
-"((v"&αζ2&")-(v"&αζ3&"))*(conj(i"&αζ1&"))"→#("fs"&αζ1)
+©"((v"&αζ2&")-(v"&αζ3&"))*(conj(i"&αζ1&"))"→#("fs"&αζ1)
 EndIf
-If inString("e,j",left(αζ1,1))≠0 Then
+If inString("e,j",αζ11)≠0 Then
 expr("((v"&αζ2&")-(v"&αζ3&"))/(–i"&αζ1&")→r"&αζ1)
 EndIf
-If left(αζ1,1)="o" Then
+If αζ11="o" Then
 expr("(v"&αζ4&")*(conj(–i"&αζ1&"))→s"&αζ1)
 EndIf
 EndFor
@@ -96,16 +98,17 @@ Disp "expressions."
 EndIf
 For αζ,1,αnec
 string(ê[αζ,1])→αζ1
+left(αζ1,1)→αζ11
 string(ê[αζ,2])→αζ2
 string(ê[αζ,3])→αζ3
 string(ê[αζ,4])→αζ4
-If inString("r,c,l,e,j",left(αζ1,1))≠0 Then
+If inString("r,c,l,e,j",αζ11)≠0 Then
 expr("((v"&αζ2&")-(v"&αζ3&"))*(i"&αζ1&")→p"&αζ1)
 EndIf
-If inString("e,j",left(αζ1,1))≠0 Then
+If inString("e,j",αζ11)≠0 Then
 expr("((v"&αζ2&")-(v"&αζ3&"))/(–i"&αζ1&")→r"&αζ1)
 EndIf
-If left(αζ1,1)="o" Then
+If αζ11="o" Then
 expr("(v"&αζ4&")*(–i"&αζ1&")→p"&αζ1)
 EndIf
 EndFor
@@ -117,18 +120,24 @@ Goto ζ2
 ElseIf αpurpose="Expert" Then
 dim(αeql)→αdeql
 string(expr(left(αeql,αdeql-1)))→αeql
-If getType(newequ)="STR" Then
+If getType(s\newequ)="STR" Then
 DelVar αddequ,αddunk
-If s\si=true Then
-string(expr(newequ&σΓsi))→newequ
-EndIf
-αeql&" and "&newequ→αeql
+
+©Prefixes
+s\newequ→s\sit
+s\si()
+s\sit→s\newequ
+DelVar s\sit
+©
+
+αeql&" and "&s\newequ→αeql
 EndIf
 dim(αeql)→αdeql
-If getType(newequ)="STR" Then
+If getType(s\newequ)="STR" Then
 1→ζkip
 Else
 2→ζkip
+ClrIO
 Dialog
 Title "Expert Mode"
 Request "Add equations",αddequ
@@ -143,9 +152,14 @@ EndIf
 EndIf
 If getType(αddequ)="STR" Then
 If αddequ≠"" Then
-If s\si=true Then
-string(expr(αddequ&σΓsi))→αddequ
-EndIf
+
+©Prefixes
+αddequ→s\sit
+s\si()
+s\sit→αddequ
+DelVar s\sit
+©
+
 αeql&" and "&αddequ→αeql
 EndIf
 EndIf
@@ -180,6 +194,7 @@ If αpurpose≠"Expert" Then
 false→s\select
 Else
 DelVar x1
+ClrIO
 Dialog
 Title "Do you need all answers?"
 Text "Selecting wisely which answers to save"
@@ -199,6 +214,7 @@ EndIf
 EndIf
 EndIf
 If s\select and getType(s\savevars)="NONE" Then
+ClrIO
 Dialog
 Title "List the answers to save"
 Text "Please list the first and second level"
@@ -217,6 +233,7 @@ If getType(s\postpone)="NONE" Then
 If αpurpose≠"Expert" Then
 false→s\postpone
 Else
+ClrIO
 Dialog
 Title "Inverse Laplace"
 Text "Postponing the execution of the"
@@ -273,6 +290,7 @@ DelVar αζval,αζvar,αζact,σΓsi
 ©=
 string(αζans)→αζanst
 If inString(αζanst,"=")=0 Then
+ClrIO
 Dialog
 Title "Error!"
 Text "Calculator failed to solve"
@@ -280,6 +298,7 @@ Text "the equations. If you used"
 Text "numeric values, try again"
 Text "using symbolic values only."
 EndDlog
+ClrIO
 Dialog
 Title "Variables"
 Text "Some vars were created in"
@@ -464,21 +483,21 @@ string(ê[αζ,1])→αζ1
 string(ê[αζ,2])→αζ2
 string(ê[αζ,3])→αζ3
 string(ê[αζ,4])→αζ4
-If inString("r,c,l,e,j",left(αζ1,1))≠0 Then
+left(αζ1,1)→αζ11
+If inString("r,c,l,e,j",αζ11)≠0 Then
 expr("((v"&αζ2&")-(v"&αζ3&"))*(conj(i"&αζ1&"))→s"&αζ1)
-"((v"&αζ2&")-(v"&αζ3&"))*(conj(i"&αζ1&"))"→#("fs"&αζ1)
+©"((v"&αζ2&")-(v"&αζ3&"))*(conj(i"&αζ1&"))"→#("fs"&αζ1)
 EndIf
-If inString("e,j",left(αζ1,1))≠0 Then
+If inString("e,j",αζ11)≠0 Then
 expr("((v"&αζ2&")-(v"&αζ3&"))/(–i"&αζ1&")→r"&αζ1)
 EndIf
-If left(αζ1,1)="o" Then
+If αζ11="o" Then
 expr("(v"&αζ4&")*(conj(–i"&αζ1&"))→s"&αζ1)
 EndIf
 EndFor
 EndIf
 
-
 expr("DelVar "&αdl)
-DelVar αdunk2,αdunk1,αdl,αeql,αuk2,αuk2v,αuk1v,αuk1,αszc,γζ,βζ0,Γζ0,δζ1,δζ2,tmp1,tmp2,tmp3,ζcon,ζkad,αukn1,αukn2,ζge3,s\postpone,s\select,s\savevars,s\savevara,s\savevari,s\svvarin,s\svvaran,αpurpose,αuk1α,αζl,s\savevaro,αζanst,αuk1α
+DelVar αdunk2,αdunk1,αdl,αeql,αuk2,αuk2v,αuk1v,αuk1,αszc,γζ,βζ0,Γζ0,δζ1,δζ2,tmp1,tmp2,tmp3,ζcon,ζkad,αukn1,αukn2,ζge3,s\postpone,s\select,s\savevars,s\savevara,s\savevari,s\svvarin,s\svvaran,αpurpose,αuk1α,αζl,s\savevaro,αζanst,αuk1α,ζkip,s\newequ,s\newunk
 2.→ok
 EndPrgm
