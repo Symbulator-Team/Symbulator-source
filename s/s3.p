@@ -1,6 +1,6 @@
 (ê,ω,µn1,µn2)
 Prgm
-If ok=7 Then
+If ok=7. Then
 Return 
 EndIf
 
@@ -26,7 +26,7 @@ Text "nodes can't be reference"
 Text "node 0. Please fix"
 Text "circuit description."
 EndDlog
-3→ok
+3.→ok
 EndIf
 EndIf
 
@@ -39,7 +39,7 @@ Text "Both nodes of "&αζ1
 Text "can't be the same. Please"
 Text "fix circuit description."
 EndDlog
-3→ok
+3.→ok
 EndIf
 EndIf
 
@@ -52,7 +52,7 @@ Text "The name of element #"&string(αζ)
 Text "is not appropriate. Please"
 Text "fix circuit description."
 EndDlog
-3→ok
+3.→ok
 EndIf
 
 If αζ2="0" or αζ3="0" Then
@@ -68,7 +68,7 @@ If αζ2=string(µn2) or αζ3=string(µn2) Then
 EndIf
 EndIf
 
-If βtool="fd" and instring("e,j",αζ11)≠0 Then
+If βtool="fd" and inString("e,j",αζ11)≠0 Then
 If αζ4≠string(ê[αζ,4]|t=0) Then
 ClrIO
 Dialog
@@ -77,7 +77,7 @@ Text "In '"&βtool&"' analysis the value of '"&αζ1&"'"
 Text "can't be in terms of variable 't'."
 Text "Please fix this source's description."
 EndDlog
-3→ok
+3.→ok
 EndIf
 EndIf
 
@@ -92,7 +92,7 @@ Text "Both nodes used as input"
 Text "are the same node. Please"
 Text "fix command description."
 EndDlog
-3→ok
+3.→ok
 EndIf
 If αζn1=0 Then
 ClrIO
@@ -102,7 +102,7 @@ Text "Circuit doesn't contain"
 Text "a node named "&string(µn1)&". Please"
 Text "fix circuit description."
 EndDlog
-3→ok
+3.→ok
 EndIf
 If αζn2=0 Then
 ClrIO
@@ -112,7 +112,7 @@ Text "Circuit doesn't contain"
 Text "a node named "&string(µn2)&". Please"
 Text "fix circuit description."
 EndDlog
-3→ok
+3.→ok
 EndIf
 Else
 If αζg=0 Then
@@ -124,7 +124,7 @@ Text "least one node labeled as"
 Text "reference node 0. Please"
 Text "fix circuit description."
 EndDlog
-3→ok
+3.→ok
 EndIf
 EndIf
 

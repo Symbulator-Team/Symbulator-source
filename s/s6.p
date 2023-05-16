@@ -317,8 +317,10 @@ EndIf
 s\sa()
 ©=
 expr(αζanst)→αζans
+If s\verbose Then
 Disp "Storing 1st and 2nd level"
 Disp "answers."
+EndIf
 While inString(string(part(αζans,1)),"=")≠0 or inString(string(part(αζans,2)),"=")≠0
 part(αζans,1)→αζact
 part(αζans,2)→αζans
@@ -390,12 +392,16 @@ EndIf
 If βtool="tr" Then
 ClrIO
 If s\postpone Then
+If s\verbose Then
 Disp "Postponing inverse Laplace"
 Disp "transform of the answers."
+EndIf
 Else
 startTmr()→s\til
+If s\verbose Then
 Disp "Finding inverse Laplace"
 Disp "transform of the answers."
+EndIf
 EndIf
 EndIf
 ©=
@@ -415,14 +421,21 @@ EndIf
 EndIf
 If βtool="tr" Then
 If s\postpone Then
+If s\verbose Then
 Disp "Postponing inverse Laplace"
 Disp "transform of "&αukn2&"..."
+EndIf
+
 "s\s2t("&string(αuk2v[γζ])&")"→#αukn2
 Else
+If s\verbose Then
 Disp "Finding inverse Laplace"
 Disp "transform of "&αukn2&"..."
+EndIf
 expr(string(dif\ilaplace(αuk2v[γζ],s))&"→"&αukn2)
+If s\verbose Then
 Disp "Done!"
+EndIf
 EndIf
 Else
 expr(string(αuk2v[γζ])&"→"&αukn2)
@@ -448,14 +461,20 @@ If inString(αuk1α,αukn1)=0 Then
 αuk1v[γζ]→#αukn1
 Else
 If s\postpone Then
+If s\verbose Then
 Disp "Postponing inverse Laplace"
 Disp "transform of "&αukn1&"..."
+EndIf
 "s\s2t("&string(αuk1v[γζ])&")"→#αukn1
 Else
+If s\verbose Then
 Disp "Finding inverse Laplace"
 Disp "transform of "&αukn1&"..."
+EndIf
 expr(string(dif\ilaplace(αuk1v[γζ],s))&"→"&αukn1)
+If s\verbose Then
 Disp "Done!"
+EndIf
 EndIf
 EndIf
 Lbl αskunk1

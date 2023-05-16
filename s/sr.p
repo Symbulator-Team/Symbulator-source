@@ -2,14 +2,14 @@
 Prgm
 
 Local revised,still,len
-ç→revised
+s\sit→revised
 dim(old)→len
-instring(revised,old)→still
+inString(revised,old)→still
 
 While still≠0
 left(revised,still-1)&new&mid(revised,still+len)→revised
-instring(revised,old)→still
+inString(revised,old)→still
 EndWhile
 
-revised→ç
+revised→s\sit
 EndPrgm

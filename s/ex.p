@@ -4,9 +4,13 @@ If ok=7. Then
 Return 
 EndIf
 startTmr()→s\tex
+
+If getType(s\verbose)="NONE" Then
 true→s\verbose
-Local αna
 ClrIO
+EndIf
+
+Local αna
 "Expert"→αpurpose
 
 If getType(s\toa)="STR" Then
@@ -66,8 +70,10 @@ If δta=4 Then
 s\tr(â)
 EndIf
 
-DelVar δta,δω,û,s\verbose,newequ,newunk,αpurpose
+DelVar δta,δω,û,newequ,newunk
+If s\verbose Then
 Disp "Elapsed: "&string(checkTmr(exact(s\tex)))&" seconds."
+EndIf
 DelVar s\tex
 DispHome
 EndPrgm

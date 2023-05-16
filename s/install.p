@@ -1,7 +1,7 @@
 ()
 Prgm
 ClrIO
-7→ok
+7.→ok
 
 s\version()
 Disp "       Installing..."

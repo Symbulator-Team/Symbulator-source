@@ -1,6 +1,6 @@
 (τξeli,τξnte)
 Prgm
-If ok=7 Then
+If ok=7. Then
 Return 
 EndIf
 ":"&τξeli→τξele
@@ -17,15 +17,15 @@ ElseIf τξnfz=2 Then
 EndIf
 
 1→τξflo
-While instring(ç,τξele,τξflo)≠0
-If ok=3 Then
+While inString(ç,τξele,τξflo)≠0
+If ok=3. Then
 Goto aus
 EndIf
 dim(ç)→τξlen
-instring(ç,τξele,τξflo)+1→τξelo
-If instring(ç,":",τξelo)≠0 Then
+inString(ç,τξele,τξflo)+1→τξelo
+If inString(ç,":",τξelo)≠0 Then
 
-instring(ç,":",τξelo)-1→τξslo
+inString(ç,":",τξelo)-1→τξslo
 τξslo-τξelo+1→τξelg
 right(left(ç,τξslo),τξelg)→τξeds
 left(ç,τξslo)&τξfil&right(ç,τξlen-τξslo)→ç
@@ -52,7 +52,7 @@ Text "it has "&string(τξend)&" terms, whereas in "&βtool&" analysis"
 Text "exactly "&string(τξnte)&" terms are expected for a "&left(string(τξedn),1)&"."
 Text "Please fix this element's description."
 EndDlog
-3→ok
+3.→ok
 Goto aus
 EndIf
 
@@ -65,7 +65,7 @@ EndWhile
 Lbl aus
 DelVar τξelo,τξflo,τξlef,τξlen,τξslo,τξfil,τξnfz,τξele,τξend,τξedd,τξedm,τξedn,τξeds,τξelg,τξx
 
-If ok=3 Then
+If ok=3. Then
 Return 
 EndIf
 

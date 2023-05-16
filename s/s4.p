@@ -1,6 +1,6 @@
 (ê)
 Prgm
-If ok=7 Then
+If ok=7. Then
 Return 
 EndIf
 dim(ê)→αszc
@@ -31,7 +31,7 @@ If αζ1≠"c" Then
 expr("DelVar r"&αζ1)
 EndIf
 
-If instring("t,z,y,h,g,a,b",αζ11)≠0 Then
+If inString("t,z,y,h,g,a,b",αζ11)≠0 Then
 expr("DelVar i"&αζ1&αζ2)
 expr("DelVar i"&αζ1&αζ3)
 EndIf

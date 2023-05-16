@@ -1,6 +1,6 @@
 ()
 Prgm
-If ok=7 Then
+If ok=7. Then
 Return 
 EndIf
 Local γv1,γv2,γi1,γi2

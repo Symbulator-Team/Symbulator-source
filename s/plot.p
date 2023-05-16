@@ -1,6 +1,6 @@
 ()
 Prgm
-If ok=7 Then
+If ok=7. Then
 Return 
 EndIf
 Local αxmin,αxmax,αvar,αxvar
@@ -11,7 +11,7 @@ Text "Symbulator requires you to"
 Text "set English as language in"
 Text "MODE. Sorry!"
 EndDlog
-3→ok
+3.→ok
 Return 
 EndIf
 DelVar y1,y2:ClrGraph:setMode("Complex Format","RECTANGULAR"):setMode("Angle","RADIAN"):setMode("Graph","FUNCTION"):setGraph("Axes","On"):setGraph("Labels","Off"):setGraph("Coordinates","Rect"):

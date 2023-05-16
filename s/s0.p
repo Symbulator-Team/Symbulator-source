@@ -1,6 +1,6 @@
 (â,ω,µn1,µn2)
 Prgm
-If ok=7 Then
+If ok=7. Then
 Return 
 EndIf
 If right(left(string(getConfg()),14),12)≠"Product Name" Then
@@ -11,7 +11,7 @@ Text "Symbulator requires you to"
 Text "set English as language in"
 Text "MODE. Sorry!"
 EndDlog
-3→ok
+3.→ok
 Return 
 EndIf
 ©=
@@ -32,19 +32,26 @@ Text "used exact numeric values,"
 Text "try with approximate values,"
 Text "or else with symbolic values."
 EndDlog
-3→ok
+3.→ok
 Return 
 EndIf
 
+If s\verbose Then
 s\version()
+EndIf
 
 {getMode("Display Digits"),getMode("Exponential Format"),getMode("Exact/Approx"),getMode("Complex Format"),getMode("Angle"),getMode("Base")}→αζmode
 setMode("Exact/Approx","AUTO")
 setMode("Complex Format","RECTANGULAR")
 setMode("Angle","RADIAN")
 setMode("Base","DEC")
+
 If s\ck Then
+If s\verbose Then
 Disp "Checking input description."
+
+EndIf
+
 If getType(â)="STR" Then
 ©
 ":"&â→ç
@@ -58,7 +65,7 @@ s\sit→ç
 DelVar s\sit
 ©
 
-If instring("fd,tr",βtool)≠0 Then
+If inString("fd,tr",βtool)≠0 Then
 s\s2("l",5)
 s\s2("c",5)
 Else
@@ -80,7 +87,7 @@ s\s2("a",3)
 s\s2("b",3)
 s\s2("t",5)
 
-If ok=3 Then
+If ok=3. Then
 DelVar αζmode,βtool,ç
 Return 
 EndIf
@@ -89,15 +96,15 @@ right(ç,çlen)→û
 
 ©
 0→colon
-While instring(û,":",colon+1)≠0
-instring(û,":",colon+1)→colon
+While inString(û,":",colon+1)≠0
+inString(û,":",colon+1)→colon
 left(û,colon-1)&";"&mid(û,colon+1)→û
 EndWhile
 DelVar colon
 
 ©
 s\s3(expr("["&û&"]"),ω,µn1,µn2)
-If ok=3 Then
+If ok=3. Then
 Return 
 EndIf
 s\s4(expr("["&û&"]"))
@@ -112,7 +119,7 @@ Text "circuit description to be"
 Text "a string. Fix the circuit"
 Text "description, please."
 EndDlog
-3→ok
+3.→ok
 EndIf
 Else
 If getType(v0)="NUM" Then
@@ -124,7 +131,7 @@ Text "circuit description check."
 Text "Symbulator requires you to"
 Text "manually clean "&getFold()&" folder."
 EndDlog
-3→ok
+3.→ok
 EndIf
 EndIf
 EndPrgm

@@ -1,15 +1,15 @@
 ()
 Prgm
-If ok=7 Then
+If ok=7. Then
 Return 
 EndIf
 ©=
-instring(αζanst," or ")→αorp
+inString(αζanst," or ")→αorp
 If αorp≠0 Then
 left(αζanst,αorp-1)→αtbest
 mid(αζanst,αorp+4)→αtrest
-While instring(αtrest," or ")≠0
-instring(αtrest," or ")→αorp
+While inString(αtrest," or ")≠0
+inString(αtrest," or ")→αorp
 left(αtrest,αorp-1)→αtnext
 mid(αtrest,αorp+4)→αtrest
 If dim(αtnext)>dim(αtbest) Then
