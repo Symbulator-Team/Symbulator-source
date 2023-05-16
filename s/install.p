@@ -32,9 +32,10 @@ s\s9()
 s\s2("r",4)
 s\s1()
 s\sa()
-"xyz"→ç
+"xyz"→s\sit
+s\si()
 s\sr("y","t")
-DelVar ç
+DelVar s\sit
 s\t2s(t)
 s\th(cir,1,0)
 s\tr(cir)
