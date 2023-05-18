@@ -29,8 +29,12 @@
 	* Version 7 alpha-2: Changed expert and equivalent resistance
 	tools.
 
+2023-05-15 Roberto Perez-Franco <roberto@perez-franco.com>
+
+	* Version 7 beta: Changed th. Fixed bug in s\port. Updated
+	the menu.
+
 Copyright 1998-2008, Roberto Perez-Franco
-Copyright 2014, The Symbulator team
 Copyright 2022 LdBeth
 Copyright 2023 Roberto Perez-Franco, LdBeth
 Copying and distribution of this file, with or without modification, are

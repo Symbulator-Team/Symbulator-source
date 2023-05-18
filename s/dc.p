@@ -4,7 +4,11 @@ If ok=7. Then
 Return 
 EndIf
 startTmr()→s\tdc
+
+If getType(s\verbose)="NONE" Then
 true→s\verbose
+EndIf
+
 DelVar βtool
 "dc"→βtool
 s\s0(â,ω,µn1,µn2)
@@ -16,7 +20,8 @@ EndIf
 s\s5(expr("["&û&"]"),1)
 DelVar βtool
 s\s9()
+DelVar û,αmetagat
 Disp "Elapsed: "&string(checkTmr(exact(s\tdc)))&" seconds."
-DelVar s\tdc,û,s\verbose
+DelVar s\tdc
 DispHome
 EndPrgm

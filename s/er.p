@@ -4,7 +4,11 @@ If ok=7. Then
 Return 
 EndIf
 startTmr()→s\ter
-false→s\verbose
+"Equival"→αpurpose
+If getType(s\verbose)="NONE" Then
+true→s\verbose
+EndIf
+
 If getMode("Exact/Approx")="APPROXIMATE" Then
 exact(µn1)→µn1
 exact(µn2)→µn2
@@ -48,12 +52,14 @@ EndIf
 true→s\select
 "{v"&µn1&",v"&µn2&"}"→s\savevars
 
+If s\verbose Then
 ClrIO
 Disp "Symbulator is running a"
 Disp "simulation with a 1 ampere"
 Disp "current source to find"
 Disp "the equivalent resistance."
 Disp "Please wait..."
+EndIf
 
 If δta=1 Then
 "jε1,"&µn2&","&µn1&",1,0;"&û→û
@@ -102,6 +108,7 @@ If δta=3 Then
 expr("–vjε1/jε1→zEq")
 EndIf
 s\s4(expr("["&û&"]"))
+If s\verbose Then
 ClrIO
 If δta=1 Then
 Disp "Equivalent Resistance is"
@@ -110,10 +117,13 @@ Else
 Disp "Equivalent Impedance is"
 Disp string(zeq)
 EndIf
+EndIf
 DelVar δtc,δta,δω,dcir,αncc,αnec,αszc,αζ1,αζ2,αζ3,αζ4,αζ5
 s\s9()
-DelVar û,s\verbose
+DelVar û,αmetagat
+If s\verbose Then
 Disp "Elapsed: "&string(checkTmr(exact(s\ter)))&" seconds."
+EndIf
 DelVar s\ter
 DispHome
 EndPrgm

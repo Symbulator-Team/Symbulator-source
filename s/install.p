@@ -40,7 +40,10 @@ s\t2s(t)
 s\th(cir,1,0)
 s\tr(cir)
 expr("Archive "&s\list)
-Lock s\ck
+If getType(s\verbose)="NONE" Then
+true→s\verbose
+EndIf
+Lock s\ck,s\verbose
 DelVar ai,ap,av,ij1,ino,pj1,sj1,vth,zi,ir1,pr1,sr1,v0,v1,αpurpose
 0.→ok
 DispHome

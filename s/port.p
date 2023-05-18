@@ -4,7 +4,11 @@ If ok=7. Then
 Return 
 EndIf
 startTmr()→s\tpo
-false→s\verbose
+true→αmetagat
+If getType(s\verbose)="NONE" Then
+true→s\verbose
+EndIf
+
 Local αp11,αp12,αp21,αp22
 If getMode("Exact/Approx")="APPROXIMATE" Then
 exact(µn1)→µn1
@@ -43,7 +47,6 @@ If ok=0. Then
 Return 
 EndIf
 EndIf
-
 If getType(s\dtp)="STR" and getType(s\dtn)="STR" Then
 If s\dtp="z" Then
 1→δtp
@@ -64,7 +67,6 @@ If s\dtp="b" Then
 6→δtp
 EndIf
 s\dtn→δnm
-DelVar s\dtn,s\dtp
 Else
 Dialog
 Title "Find 2-port parameters"
@@ -83,20 +85,16 @@ EndIf
 string(µn1)→µn1
 string(µn2)→µn2
 
-true→s\select
-
 If δtp=1 or δtp=5 Then
-"v"&µn1&",v"&µn2→s\savevars
 "jε1,0,"&µn1&",jε1,0;jε2,0,"&µn2&",jε2,0;"&û→û
 EndIf
 If δtp=2 or δtp=4 Then
-"ieε1,ieε2,v"&µn1&",v"&µn2→s\savevars
 "eε1,"&µn1&",0,eε1,0;eε2,"&µn2&",0,eε2,0;"&û→û
 EndIf
 If δtp=3 or δtp=6 Then
-"ieε2,v"&µn1&",v"&µn2→s\savevars
 "jε1,0,"&µn1&",jε1,0;eε2,"&µn2&",0,eε2,0;"&û→û
 EndIf
+
 If δta=1 Then
 "dc"→βtool
 s\s5(expr("["&û&"]"),1)
@@ -179,8 +177,11 @@ expr("(αp11*αp22-αp12*αp21)/αp12→b"&δnm&"22")
 EndIf
 s\s4(expr("["&û&"]"))
 ClrIO
-Disp "Parameters Found"
-Disp "Press [ENTER] to see them."
+Disp "Parameters have been found"
+Disp "and are stored in memory."
+Disp "Elapsed: "&string(checkTmr(exact(s\tpo)))&" seconds."
+DelVar s\tpo
+Pause "[ENTER] to see one by one:"
 If δtp=1 Then
 Pause "z"&δnm&"11 is "&string(expr("z"&δnm&"11"))
 Pause "z"&δnm&"12 is "&string(expr("z"&δnm&"12"))
@@ -219,8 +220,6 @@ Pause "b"&δnm&"22 is "&string(expr("b"&δnm&"22"))
 EndIf
 DelVar δtp,δta,δnm,dcir,δω,αncc,αnec,αszc,αζ1,αζ2,αζ3,αζ4,αζ5
 s\s9()
-DelVar û,s\verbose
-Disp "Elapsed: "&string(checkTmr(exact(s\tpo)))&" seconds."
-DelVar s\tpo
+DelVar û,αmetagat,s\dtn,s\dtp
 DispHome
 EndPrgm

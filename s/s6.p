@@ -4,10 +4,12 @@ If ok=7. Then
 Return 
 EndIf
 ©=
+If getType(αmetagat)="NONE" Then
+false→αmetagat
+EndIf
 0→v0
 0→Γζ0
 0→βζ0
-""→ζkad
 ""→ζcon
 1→ζge3
 "{"→αuk1
@@ -16,7 +18,7 @@ EndIf
 " "→αdl
 2→ζkip
 ©=
-If s\verbose Then
+If s\verbose and not αmetagat Then
 ClrIO
 Disp "Generating 1st level"
 Disp "equations and 2nd level"
@@ -25,7 +27,7 @@ EndIf
 ©=
 If iµpaλa Then
 iµpaexe&"}"→iµpaexe
-If s\verbose Then
+If s\verbose and not αmetagat Then
 Disp "  (Impala) ▶ Running"
 EndIf
 EndIf
@@ -61,13 +63,13 @@ left(αdl,δζ1)→αdl
 dim(αuk2)-1→δζ1
 left(αuk2,δζ1)&"}"→αuk2
 dim(αeql)-4→δζ2
-left(αeql,δζ2)&","→αeql
+left(αeql,δζ2)→αeql
 DelVar αζans
 dim(αuk1)→αdunk1
 expr("DelVar "&left(right(αuk1,αdunk1-1),αdunk1-2))
 ©=
 If βtool="ac" Then
-If s\verbose Then
+If s\verbose and not αmetagat Then
 ClrIO
 Disp "Generating 3rd level"
 Disp "expressions."
@@ -80,10 +82,9 @@ string(ê[αζ,3])→αζ3
 string(ê[αζ,4])→αζ4
 If inString("r,c,l,e,j",αζ11)≠0 Then
 expr("((v"&αζ2&")-(v"&αζ3&"))*(conj(i"&αζ1&"))→s"&αζ1)
-©"((v"&αζ2&")-(v"&αζ3&"))*(conj(i"&αζ1&"))"→#("fs"&αζ1)
 EndIf
 If inString("e,j",αζ11)≠0 Then
-expr("((v"&αζ2&")-(v"&αζ3&"))/(–i"&αζ1&")→r"&αζ1)
+expr("((v"&αζ2&")-(v"&αζ3&"))/(–i"&αζ1&")→z"&αζ1)
 EndIf
 If αζ11="o" Then
 expr("(v"&αζ4&")*(conj(–i"&αζ1&"))→s"&αζ1)
@@ -91,7 +92,7 @@ EndIf
 EndFor
 EndIf
 If βtool="dc" Then
-If s\verbose Then
+If s\verbose and not αmetagat Then
 ClrIO
 Disp "Generating 3rd level"
 Disp "expressions."
@@ -120,18 +121,27 @@ Goto ζ2
 ElseIf αpurpose="Expert" Then
 dim(αeql)→αdeql
 string(expr(left(αeql,αdeql-1)))→αeql
-If getType(s\newequ)="STR" Then
-DelVar αddequ,αddunk
 
+If getType(s\newequ)="STR" Then
 ©Prefixes
 s\newequ→s\sit
 s\si()
 s\sit→s\newequ
 DelVar s\sit
 ©
-
 αeql&" and "&s\newequ→αeql
 EndIf
+
+If getType(s\newcon)="STR" Then
+©Prefixes
+s\newcon→s\sit
+s\si()
+s\sit→s\newcon
+DelVar s\sit
+©
+s\newcon→ζcon
+EndIf
+
 dim(αeql)→αdeql
 If getType(s\newequ)="STR" Then
 1→ζkip
@@ -142,7 +152,7 @@ Dialog
 Title "Expert Mode"
 Request "Add equations",αddequ
 Request "Add unknowns",αddunk
-Request "Add conditions",ζkad
+Request "Add conditions",αddcon
 DropDown "What to do",{"Symbulate","Symbulate+Keep","Just Keep"},ζkip
 EndDlog
 If ok=0. Then
@@ -152,36 +162,52 @@ EndIf
 EndIf
 If getType(αddequ)="STR" Then
 If αddequ≠"" Then
-
 ©Prefixes
 αddequ→s\sit
 s\si()
 s\sit→αddequ
 DelVar s\sit
 ©
-
 αeql&" and "&αddequ→αeql
 EndIf
 EndIf
-αeql&","→αeql
+
 If getType(αddunk)="STR" Then
 If αddunk≠"" Then
 dim(αuk1)-1→δζ1
 left(αuk1,δζ1)&","&αddunk&"}"→αuk1
 EndIf
 EndIf
-If ζkad≠"" Then
-"|"&ζkad→ζcon
+
+If getType(αddcon)="STR" Then
+If αddcon≠"" Then
+©Prefixes
+αddcon→s\sit
+s\si()
+s\sit→αddcon
+DelVar s\sit
+©
+αddcon→ζcon
 EndIf
+EndIf
+
+If ζcon≠"" Then
+"|"&ζcon→ζcon
+EndIf
+
 If ζkip≠1 Then
 αuk1→unknown
 left(αeql,dim(αeql)-1)→equation
-If ζkad≠"" Then
-ζkad→wheneq
+
+If getType(αddcon)="STR" Then
+If αddcon≠"" Then
+αddcon→wheneq
 EndIf
+EndIf
+
 If ζkip=3 Then
 expr("DelVar "&αdl)
-DelVar v0,αdunk2,αdunk1,αdl,αeql,αuk2,αuk2v,αuk1v,αuk1,αszc,γζ,βζ0,Γζ0,δζ1,δζ2,tmp1,tmp2,tmp3,ζcon,αdeql,ζkip,ζki2,ζge3,ζkad,αuk1α
+DelVar v0,αdunk2,αdunk1,αdl,αeql,αuk2,αuk2v,αuk1v,αuk1,αszc,γζ,βζ0,Γζ0,δζ1,δζ2,tmp1,tmp2,tmp3,ζcon,αdeql,ζkip,ζki2,ζge3,αuk1α
 2.→ok
 Return 
 EndIf
@@ -193,7 +219,7 @@ If getType(s\select)="NONE" Then
 If αpurpose≠"Expert" Then
 false→s\select
 Else
-DelVar x1
+DelVar ψγ1,ψγ2
 ClrIO
 Dialog
 Title "Do you need all answers?"
@@ -201,12 +227,12 @@ Text "Selecting wisely which answers to save"
 Text "will expedite any simulation that has"
 Text "long or complicated symbolic terms."
 Text ""
-DropDown "Answers to save?",{"All of them","Only selected"},x1
+DropDown "Answers to save?",{"All of them","Only selected"},ψγ1
 EndDlog
 If ok=0. Then
 Return 
 EndIf
-If x1=2 Then
+If ψγ1=2 Then
 true→s\select
 Else
 false→s\select
@@ -227,7 +253,7 @@ If ok=0. Then
 Return 
 EndIf
 EndIf
-DelVar x1,x2
+DelVar ψγ1
 If βtool="tr" Then
 If getType(s\postpone)="NONE" Then
 If αpurpose≠"Expert" Then
@@ -240,17 +266,17 @@ Text "Postponing the execution of the"
 Text "inverse Laplace transform will"
 Text "expedite a TR-mode simulation."
 Text ""
-DropDown "Do Inverse Laplace?",{"On the fly","Postpone it"},x2
+DropDown "Do Inverse Laplace?",{"On the fly","Postpone it"},ψγ2
 EndDlog
 If ok=0. Then
 Return 
 EndIf
-If x2=2 Then
+If ψγ2=2 Then
 true→s\postpone
 Else
 false→s\postpone
 EndIf
-DelVar x2
+DelVar ψγ2
 EndIf
 EndIf
 EndIf
@@ -261,7 +287,7 @@ string(expr(s\savevars))→s\savevars
 s\savevaro&","&right(s\savevars,dim(s\savevars)-1)→s\savevaro
 EndIf
 ©=
-If s\verbose Then
+If s\verbose and not αmetagat Then
 ClrIO
 Disp "Solving the system of all"
 Disp "1st level equations."
@@ -273,16 +299,16 @@ EndIf
 If part(expr(αuk1))=1 Then
 left(right(αuk1,αdunk1-1),αdunk1-2)→αuk1
 If βtool="ac" Then
-expr("cSolve("&αeql&αuk1&")"&ζcon&"→αζans")
+expr("cSolve("&αeql&","&αuk1&")"&ζcon&"→αζans")
 Else
-expr("solve("&αeql&αuk1&")"&ζcon&"→αζans")
+expr("solve("&αeql&","&αuk1&")"&ζcon&"→αζans")
 EndIf
 "{"&αuk1&"}"→αuk1
 Else
 If βtool="ac" Then
-expr("cSolve("&αeql&αuk1&")"&ζcon&"→αζans")
+expr("cSolve("&αeql&","&αuk1&")"&ζcon&"→αζans")
 Else
-expr("solve("&αeql&αuk1&")"&ζcon&"→αζans")
+expr("solve("&αeql&","&αuk1&")"&ζcon&"→αζans")
 EndIf
 EndIf
 ©=
@@ -309,7 +335,7 @@ EndDlog
 Return 
 EndIf
 ©=
-If s\verbose Then
+If s\verbose and not αmetagat Then
 ClrIO
 Disp "Equation system solved!"
 EndIf
@@ -317,7 +343,7 @@ EndIf
 s\sa()
 ©=
 expr(αζanst)→αζans
-If s\verbose Then
+If s\verbose and not αmetagat Then
 Disp "Storing 1st and 2nd level"
 Disp "answers."
 EndIf
@@ -372,7 +398,7 @@ dim(αuk2)→αdunk2
 EndIf
 ©=
 If iµpaλa Then
-If s\verbose Then
+If s\verbose and not αmetagat Then
 Disp "  (Impala) ų Landing"
 EndIf
 expr(iµpaexe)→iµpaexe
@@ -492,7 +518,7 @@ EndFor
 EndIf
 ©=
 If βtool="ac" Then
-If s\verbose Then
+If s\verbose and not αmetagat Then
 ClrIO
 Disp "Refreshing 3rd level"
 Disp "expressions."
@@ -505,7 +531,6 @@ string(ê[αζ,4])→αζ4
 left(αζ1,1)→αζ11
 If inString("r,c,l,e,j",αζ11)≠0 Then
 expr("((v"&αζ2&")-(v"&αζ3&"))*(conj(i"&αζ1&"))→s"&αζ1)
-©"((v"&αζ2&")-(v"&αζ3&"))*(conj(i"&αζ1&"))"→#("fs"&αζ1)
 EndIf
 If inString("e,j",αζ11)≠0 Then
 expr("((v"&αζ2&")-(v"&αζ3&"))/(–i"&αζ1&")→r"&αζ1)
@@ -517,6 +542,6 @@ EndFor
 EndIf
 
 expr("DelVar "&αdl)
-DelVar αdunk2,αdunk1,αdl,αeql,αuk2,αuk2v,αuk1v,αuk1,αszc,γζ,βζ0,Γζ0,δζ1,δζ2,tmp1,tmp2,tmp3,ζcon,ζkad,αukn1,αukn2,ζge3,s\postpone,s\select,s\savevars,s\savevara,s\savevari,s\svvarin,s\svvaran,αpurpose,αuk1α,αζl,s\savevaro,αζanst,αuk1α,ζkip,s\newequ,s\newunk
+DelVar αdunk2,αdunk1,αdl,αeql,αuk2,αuk2v,αuk1v,αuk1,αszc,γζ,βζ0,Γζ0,δζ1,δζ2,tmp1,tmp2,tmp3,ζcon,αukn1,αukn2,ζge3,s\postpone,s\select,s\savevars,s\savevara,s\savevari,s\svvarin,s\svvaran,αpurpose,αuk1α,αζl,s\savevaro,αζanst,αuk1α,ζkip,s\newequ,s\newunk,s\newcon,αddcon,αddequ,αddunk
 2.→ok
 EndPrgm

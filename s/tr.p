@@ -4,7 +4,11 @@ If ok=7. Then
 Return 
 EndIf
 startTmr()→s\ttr
+
+If getType(s\verbose)="NONE" Then
 true→s\verbose
+EndIf
+
 If getType(dif\ilaplace)≠"FUNC" Then
 Dialog
 Title "DiffEq is missing!"
@@ -24,7 +28,8 @@ EndIf
 s\s5(expr("["&û&"]"),1)
 DelVar βtool
 s\s9()
+DelVar û,αmetagat
 Disp "Elapsed: "&string(checkTmr(exact(s\ttr)))&" seconds."
-DelVar s\ttr,û,s\verbose
+DelVar s\ttr
 DispHome
 EndPrgm

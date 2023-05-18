@@ -6,7 +6,12 @@ Return
 EndIf
 
 startTmr()→s\tth
-false→s\verbose
+true→αmetagat
+
+If getType(s\verbose)="NONE" Then
+true→s\verbose
+EndIf
+
 If getMode("Exact/Approx")="APPROXIMATE" Then
 exact(µn1)→µn1
 exact(µn2)→µn2
@@ -22,8 +27,7 @@ If ok=3. Then
 DispHome
 Return 
 EndIf
-
-DelVar eqcir,ino,irl,jn,l,n,pmax,prl,re,req,rl,smax,srl,vrl,vth,zeq
+DelVar req,pmax,vth,ino,zeq,smax,αwantsit
 
 string(µn1)→µn1
 string(µn2)→µn2
@@ -42,8 +46,9 @@ EndIf
 DelVar s\toa
 
 If getType(δta)="NONE" Then
+ClrIO
 Dialog
-Title "Equivalent Resistance/Impedance"
+Title "Thevenin Equivalent"
 DropDown "Type of Analysis",{"DC","AC","FD"},δta
 EndDlog
 If ok=0. Then
@@ -54,12 +59,16 @@ EndIf
 true→s\select
 "{v"&µn1&",v"&µn2&"}"→s\savevars
 
+If s\verbose Then
 ClrIO
 Disp "Symbulator is running an"
 Disp "open-circuit simulation"
 Disp "to find the circuit's"
 Disp "Thévenin voltage."
-Disp "Please wait..."
+Disp ""
+Disp "Please wait."
+EndIf
+
 If δta=1 Then
 "dc"→βtool
 s\s5(expr("["&û&"]"),1)
@@ -67,12 +76,17 @@ DelVar βtool
 EndIf
 
 If δta=2 Then
+If getType(s\ω)="STR" Then
+s\ω→δω
+DelVar s\ω
+Else
 Dialog
 Title "Radial frequency"
 Request "ω in rad/s",δω
 EndDlog
 If ok=0. Then
 Return 
+EndIf
 EndIf
 expr(δω)→δω
 "ac"→βtool
@@ -103,17 +117,20 @@ DispHome
 3.→ok
 Return 
 Else
+If s\verbose Then
 ClrIO
 Disp "Thévenin voltage found!"
 Disp "vTh is "&string(vth)
-
 Disp "Symbulator will now run a"
 Disp "short-circuit simulation"
 Disp "to find the Norton current."
-Disp "Please wait..."
+Disp "Please wait."
+EndIf
+
 û&";sε1,"&µn1&","&µn2&",0,0"→û
 
 true→s\select
+
 "{isε1,v"&µn1&",v"&µn2&"}"→s\savevars
 
 If δta=1 Then
@@ -142,8 +159,11 @@ EndIf
 ClrIO
 If inString(string(isε1),"@")=0 Then
 isε1→ino
+
+If s\verbose Then
 Disp "Norton current found!"
 Disp "iNo is "&string(ino)
+EndIf
 Else
 Disp "Short simulation failed"
 Pause "to find a Norton current."
@@ -158,40 +178,67 @@ EndIf
 
 EndIf
 
+If s\verbose Then
 If δta=1 Then
-Disp "Equivalent resistance found!"
-Disp "Req is "&string(req)
+Disp "Equivalent resistance"
+Disp "found!. Req is "&string(req)
 Else
-Disp "Equivalent impedance found!"
-Disp "zEq is "&string(zeq)
+Disp "Equivalent impedance"
+Disp "found! zEq is "&string(zeq)
+EndIf
 EndIf
 
 If δta=1 Then
 vth*ino/4→pmax
+If s\verbose Then
 Disp "pMax is "&string(pmax)
+EndIf
 EndIf
 If δta=2 Then
 vth*conj(ino)/4→smax
+If s\verbose Then
 Disp "sMax is "&string(smax)
 EndIf
-If δta=1 Then
-"jN,0,n,iNo:rE,n,0,rEq:rL,n,0,L"→eqcir
-ino*req/(l+req)→irl
-l*ino*req/(l+req)→vrl
-l*ino^2*req^2/(l+req)^2→prl
-Else
-"jN,0,n,iNo:rE,n,0,zEq:rL,n,0,L"→eqcir
-ino*zeq/(l+zeq)→irl
-l*ino*zeq/(l+zeq)→vrl
-l*ino^2*zeq^2/(l+zeq)^2→srl
 EndIf
+Pause "[ENTER] to continue."
+ClrIO
+Dialog
+Title "Is a load next?"
+Text "If you are planning to analyze next"
+Text "a load connected to this, we can give"
+Text "you an equivalent circuit you can use"
+Text "and some key equations that will help."
+DropDown "Interested?",{"Yes","No"},αwantsit
+EndDlog
+
+If αwantsit=1 Then
+
+DelVar eqcir,irl,jn,load,n,prl,re,rl,srl,vrl
+
+If δta=1 Then
+"jN,0,n,iNo:rE,n,0,rEq:rL,n,0,Load"→eqcir
+ino*req/(load+req)→irl
+load*ino*req/(load+req)→vrl
+load*ino^2*req^2/(load+req)^2→prl
+Else
+"jN,0,n,iNo:rE,n,0,zEq:rL,n,0,Load"→eqcir
+ino*zeq/(load+zeq)→irl
+load*ino*zeq/(load+zeq)→vrl
+load*ino^2*zeq^2/(load+zeq)^2→srl
+EndIf
+EndIf
+
 
 Lbl clean
 s\s4(expr("["&û&"]"))
 
 DelVar δtc,δta,δω,dcir,αncc,αnec,αszc,αζ1,αζ2,αζ3,αζ4,αζ5,isε1
 s\s9()
+
+DelVar û,αmetagat,αwantsit
+If s\verbose Then
 Disp "Elapsed: "&string(checkTmr(exact(s\tth)))&" seconds."
-DelVar s\tth,s\verbose,û
+EndIf
+DelVar s\tth
 DispHome
 EndPrgm

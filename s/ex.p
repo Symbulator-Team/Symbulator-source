@@ -5,13 +5,13 @@ Return
 EndIf
 startTmr()→s\tex
 
+"Expert"→αpurpose
+Local αna
+
 If getType(s\verbose)="NONE" Then
 true→s\verbose
-ClrIO
 EndIf
 
-Local αna
-"Expert"→αpurpose
 
 If getType(s\toa)="STR" Then
 If s\toa="DC" Then
@@ -51,6 +51,7 @@ DelVar s\ω
 Else
 Dialog
 Title "Enter radial frequency"
+
 Request "ω in rad/s",δω
 EndDlog
 If ok=0. Then
@@ -70,7 +71,7 @@ If δta=4 Then
 s\tr(â)
 EndIf
 
-DelVar δta,δω,û,newequ,newunk
+DelVar δta,δω,û,newequ,newunk,αmetagat
 If s\verbose Then
 Disp "Elapsed: "&string(checkTmr(exact(s\tex)))&" seconds."
 EndIf

@@ -21,6 +21,7 @@ expr("DelVar i"&αζ1)
 expr("DelVar s"&αζ1)
 expr("DelVar p"&αζ1)
 expr("DelVar v"&αζ1)
+expr("DelVar z"&αζ1)
 expr("DelVar v"&αζ2)
 expr("DelVar v"&αζ3)
 left(αζ1,1)→αζ11

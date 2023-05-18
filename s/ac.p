@@ -22,10 +22,10 @@ EndIf
 s\s5(expr("["&û&"]"),ω)
 DelVar βtool
 s\s9()
-
+DelVar αmetagat,û
 If s\verbose Then
 Disp "Elapsed: "&string(checkTmr(exact(s\tac)))&" seconds."
 EndIf
-DelVar s\tac,û
+DelVar s\tac
 DispHome
 EndPrgm
