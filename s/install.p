@@ -48,7 +48,7 @@ EndIf
 If getType(s\rms)="NONE" Then
 false→s\rms
 EndIf
-Lock s\ck,s\verbose
+Lock s\verbose
 DelVar ai,ap,av,ij1,ino,pj1,sj1,vth,zi,ir1,pr1,sr1,v0,v1,αpurpose
 0.→ok
 ClrIO
