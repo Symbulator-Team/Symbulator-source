@@ -3,15 +3,13 @@ Prgm
 If ok=7. Then
 Return 
 EndIf
-startTmr()→s\tex
-
+false→αmetagat
 "Expert"→αpurpose
 Local αna
 
 If getType(s\verbose)="NONE" Then
 true→s\verbose
 EndIf
-
 
 If getType(s\toa)="STR" Then
 If s\toa="DC" Then
@@ -26,18 +24,25 @@ EndIf
 If s\toa="TR" Then
 4→δta
 EndIf
+Else
+Local ââ
+":"&â→ââ
+If inString(ââ,"")≠0 or inString(ââ,":c")≠0 or inString(ââ,":l")≠0 or inString(ââ,":m")≠0 or inString(ââ,":t")≠0 Then
+2→δtask
+EndIf
 EndIf
 DelVar s\toa
 
 If getType(δta)="NONE" Then
 Dialog
 Title "Expert Mode"
-DropDown "Type of Analysis",{"DC","AC","FD","TR"},δta
+DropDown "Type of Analysis",{"DC","AC","FD"},δtask
 EndDlog
 If ok=0. Then
-DelVar αpurpose,δta
 Return 
 EndIf
+δtask→δta
+DelVar δtask
 EndIf
 
 If δta=1 Then
@@ -45,21 +50,31 @@ s\dc(â)
 EndIf
 
 If δta=2 Then
+If getType(s\rms)="NONE" Then
+false→s\rms
+EndIf
+If inString(â,":c")=0 and inString(â,":l")=0 Then
+"ω"→δω
+Else
 If getType(s\ω)="STR" Then
 s\ω→δω
 DelVar s\ω
 Else
 Dialog
 Title "Enter radial frequency"
-
-Request "ω in rad/s",δω
+Request "ω in rad/s",δω,0
 EndDlog
 If ok=0. Then
 DelVar αpurpose
 Return 
 EndIf
+δω→s\sit:s\si():s\sit→δω
+EndIf
 EndIf
 
+If δω="" Then
+"ω"→δω
+EndIf
 expr(δω)→δω
 s\ac(â,δω)
 EndIf
@@ -70,11 +85,6 @@ EndIf
 If δta=4 Then
 s\tr(â)
 EndIf
-
 DelVar δta,δω,û,newequ,newunk,αmetagat
-If s\verbose Then
-Disp "Elapsed: "&string(checkTmr(exact(s\tex)))&" seconds."
-EndIf
-DelVar s\tex
 DispHome
 EndPrgm

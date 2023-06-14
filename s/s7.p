@@ -1,6 +1,6 @@
 (αζ1,αζ2,αζ3,αζ4,αζ5,ω)
 Prgm
-If ok=7. Then
+If ok=7 Then
 Return 
 EndIf
 left(αζ1,1)→αζ11
@@ -25,10 +25,10 @@ expr("0→βζ"&αζ3)
 EndIf
 expr("βζ"&αζ3&"+i"&αζ1&αζ3&"→βζ"&αζ3)
 expr("βζ"&αζ3&"=0→Γζ"&αζ3)
-If αζ2≠"0" and inString(αuk1,"v"&αζ2)=0 Then
+If αζ2≠"0" and instring(αuk1,"v"&αζ2)=0 Then
 αuk1&"v"&αζ2&","→αuk1
 EndIf
-If αζ3≠"0" and inString(αuk1,"v"&αζ3)=0 Then
+If αζ3≠"0" and instring(αuk1,"v"&αζ3)=0 Then
 αuk1&"v"&αζ3&","→αuk1
 EndIf
 EndIf
@@ -53,10 +53,10 @@ expr("0→βζ"&αζ3)
 EndIf
 expr("βζ"&αζ3&"+i"&αζ1&αζ3&"→βζ"&αζ3)
 expr("βζ"&αζ3&"=0→Γζ"&αζ3)
-If αζ2≠"0" and inString(αuk1,"v"&αζ2)=0 Then
+If αζ2≠"0" and instring(αuk1,"v"&αζ2)=0 Then
 αuk1&"v"&αζ2&","→αuk1
 EndIf
-If αζ3≠"0" and inString(αuk1,"v"&αζ3)=0 Then
+If αζ3≠"0" and instring(αuk1,"v"&αζ3)=0 Then
 αuk1&"v"&αζ3&","→αuk1
 EndIf
 EndIf
@@ -81,10 +81,10 @@ expr("0→βζ"&αζ3)
 EndIf
 expr("βζ"&αζ3&"+i"&αζ1&αζ3&"→βζ"&αζ3)
 expr("βζ"&αζ3&"=0→Γζ"&αζ3)
-If αζ2≠"0" and inString(αuk1,"v"&αζ2)=0 Then
+If αζ2≠"0" and instring(αuk1,"v"&αζ2)=0 Then
 αuk1&"v"&αζ2&","→αuk1
 EndIf
-If αζ3≠"0" and inString(αuk1,"v"&αζ3)=0 Then
+If αζ3≠"0" and instring(αuk1,"v"&αζ3)=0 Then
 αuk1&"v"&αζ3&","→αuk1
 EndIf
 EndIf
@@ -109,10 +109,10 @@ expr("0→βζ"&αζ3)
 EndIf
 expr("βζ"&αζ3&"+i"&αζ1&αζ3&"→βζ"&αζ3)
 expr("βζ"&αζ3&"=0→Γζ"&αζ3)
-If αζ2≠"0" and inString(αuk1,"v"&αζ2)=0 Then
+If αζ2≠"0" and instring(αuk1,"v"&αζ2)=0 Then
 αuk1&"v"&αζ2&","→αuk1
 EndIf
-If αζ3≠"0" and inString(αuk1,"v"&αζ3)=0 Then
+If αζ3≠"0" and instring(αuk1,"v"&αζ3)=0 Then
 αuk1&"v"&αζ3&","→αuk1
 EndIf
 EndIf
@@ -137,10 +137,10 @@ expr("0→βζ"&αζ3)
 EndIf
 expr("βζ"&αζ3&"+i"&αζ1&αζ3&"→βζ"&αζ3)
 expr("βζ"&αζ3&"=0→Γζ"&αζ3)
-If αζ2≠"0" and inString(αuk1,"v"&αζ2)=0 Then
+If αζ2≠"0" and instring(αuk1,"v"&αζ2)=0 Then
 αuk1&"v"&αζ2&","→αuk1
 EndIf
-If αζ3≠"0" and inString(αuk1,"v"&αζ3)=0 Then
+If αζ3≠"0" and instring(αuk1,"v"&αζ3)=0 Then
 αuk1&"v"&αζ3&","→αuk1
 EndIf
 EndIf
@@ -165,10 +165,10 @@ expr("0→βζ"&αζ3)
 EndIf
 expr("βζ"&αζ3&"+i"&αζ1&αζ3&"→βζ"&αζ3)
 expr("βζ"&αζ3&"=0→Γζ"&αζ3)
-If αζ2≠"0" and inString(αuk1,"v"&αζ2)=0 Then
+If αζ2≠"0" and instring(αuk1,"v"&αζ2)=0 Then
 αuk1&"v"&αζ2&","→αuk1
 EndIf
-If αζ3≠"0" and inString(αuk1,"v"&αζ3)=0 Then
+If αζ3≠"0" and instring(αuk1,"v"&αζ3)=0 Then
 αuk1&"v"&αζ3&","→αuk1
 EndIf
 EndIf

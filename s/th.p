@@ -7,6 +7,7 @@ EndIf
 
 startTmr()→s\tth
 true→αmetagat
+"Equival"→αpurpose
 
 If getType(s\verbose)="NONE" Then
 true→s\verbose
@@ -42,6 +43,12 @@ EndIf
 If s\toa="FD" Then
 3→δta
 EndIf
+Else
+Local ââ
+":"&â→ââ
+If inString(ââ,"")≠0 or inString(ââ,":c")≠0 or inString(ââ,":l")≠0 or inString(ââ,":m")≠0 or inString(ââ,":t")≠0 Then
+2→δtask
+EndIf
 EndIf
 DelVar s\toa
 
@@ -49,11 +56,13 @@ If getType(δta)="NONE" Then
 ClrIO
 Dialog
 Title "Thevenin Equivalent"
-DropDown "Type of Analysis",{"DC","AC","FD"},δta
+DropDown "Type of Analysis",{"DC","AC","FD"},δtask
 EndDlog
 If ok=0. Then
 Return 
 EndIf
+δtask→δta
+DelVar δtask
 EndIf
 
 true→s\select
@@ -76,17 +85,30 @@ DelVar βtool
 EndIf
 
 If δta=2 Then
+If getType(s\rms)="NONE" Then
+false→s\rms
+EndIf
+If inString(â,":c")=0 and inString(â,":l")=0 Then
+"ω"→δω
+Else
 If getType(s\ω)="STR" Then
 s\ω→δω
 DelVar s\ω
 Else
 Dialog
-Title "Radial frequency"
-Request "ω in rad/s",δω
+Title "Enter radial frequency"
+Request "ω in rad/s",δω,0
 EndDlog
 If ok=0. Then
+DelVar αpurpose
 Return 
 EndIf
+δω→s\sit:s\si():s\sit→δω
+EndIf
+EndIf
+
+If δω="" Then
+"ω"→δω
 EndIf
 expr(δω)→δω
 "ac"→βtool
@@ -120,7 +142,6 @@ Else
 If s\verbose Then
 ClrIO
 Disp "Thévenin voltage found!"
-Disp "vTh is "&string(vth)
 Disp "Symbulator will now run a"
 Disp "short-circuit simulation"
 Disp "to find the Norton current."
@@ -159,10 +180,8 @@ EndIf
 ClrIO
 If inString(string(isε1),"@")=0 Then
 isε1→ino
-
 If s\verbose Then
 Disp "Norton current found!"
-Disp "iNo is "&string(ino)
 EndIf
 Else
 Disp "Short simulation failed"
@@ -181,26 +200,24 @@ EndIf
 If s\verbose Then
 If δta=1 Then
 Disp "Equivalent resistance"
-Disp "found!. Req is "&string(req)
+Disp "found!"
 Else
 Disp "Equivalent impedance"
-Disp "found! zEq is "&string(zeq)
+Disp "found!"
 EndIf
 EndIf
 
 If δta=1 Then
 vth*ino/4→pmax
-If s\verbose Then
-Disp "pMax is "&string(pmax)
-EndIf
 EndIf
 If δta=2 Then
-vth*conj(ino)/4→smax
+If s\rms Then
+(abs(vth))^2/(4*real(zeq))→pmax
+Else
+(abs(vth))^2/(8*real(zeq))→apmax
+EndIf
+EndIf
 If s\verbose Then
-Disp "sMax is "&string(smax)
-EndIf
-EndIf
-Pause "[ENTER] to continue."
 ClrIO
 Dialog
 Title "Is a load next?"
@@ -208,26 +225,36 @@ Text "If you are planning to analyze next"
 Text "a load connected to this, we can give"
 Text "you an equivalent circuit you can use"
 Text "and some key equations that will help."
-DropDown "Interested?",{"Yes","No"},αwantsit
+DropDown "Interested?",{"No","Yes"},αwantsit
 EndDlog
 
-If αwantsit=1 Then
+If αwantsit=2 Then
 
-DelVar eqcir,irl,jn,load,n,prl,re,rl,srl,vrl
+DelVar eqcir,irl,jn,load,load_,ino_,zeq_,n,prl,re,rl,srl,vrl
 
 If δta=1 Then
 "jN,0,n,iNo:rE,n,0,rEq:rL,n,0,Load"→eqcir
-ino*req/(load+req)→irl
-load*ino*req/(load+req)→vrl
-load*ino^2*req^2/(load+req)^2→prl
+Define irl=ino*req/(load+req)
+Define vrl=load*ino*req/(load+req)
+Define prl=load*ino^2*req^2/(load+req)^2
 Else
-"jN,0,n,iNo:rE,n,0,zEq:rL,n,0,Load"→eqcir
-ino*zeq/(load+zeq)→irl
-load*ino*zeq/(load+zeq)→vrl
-load*ino^2*zeq^2/(load+zeq)^2→srl
+"jN,0,n,iNo:rE,n,0,zEq:rL,n,0,Load_"→eqcir
+Define ino_=ino
+Define zeq_=zeq
+If s\rms Then
+Define irl=ino_*zeq_/(load_+zeq_)
+Define vrl=ino_*load_*zeq_/(load_+zeq_)
+Define prl=real(ino_*conj(ino_)*load_*zeq_*conj(zeq_)/((load_+zeq_)*(conj(load_)+conj(zeq_))))
+Define srl=ino_*conj(ino_)*load_*zeq_*conj(zeq_)/((load_+zeq_)*(conj(load_)+conj(zeq_)))
+Else
+Define irl=ino_*zeq_/(load_+zeq_)
+Define vrl=ino_*load_*zeq_/(load_+zeq_)
+Define aprl=real(ino_*conj(ino_)*load_*zeq_*conj(zeq_)/((load_+zeq_)*(conj(load_)+conj(zeq_))))/2
+Define srl=ino_*conj(ino_)*load_*zeq_*conj(zeq_)/(2*(load_+zeq_)*(conj(load_)+conj(zeq_)))
 EndIf
 EndIf
-
+EndIf
+EndIf
 
 Lbl clean
 s\s4(expr("["&û&"]"))

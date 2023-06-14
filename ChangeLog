@@ -34,6 +34,36 @@
 	* Version 7 beta: Changed th. Fixed bug in s\port. Updated
 	the menu.
 
+2023-05-20 Roberto Perez-Franco <roberto@perez-franco.com>
+
+	* Version 7 beta-3u: Fixed a bug in expert mode
+
+2023-06-07 Roberto Perez-Franco <roberto@perez-franco.com>
+
+	* Version 7 beta-14: Many changes and improvements on
+	AC, TR.
+
+2023-06-08 Roberto Perez-Franco <roberto@perez-franco.com>
+
+	* Version 7 beta-15: Killed an FD bug.
+
+2023-06-09 Roberto Perez-Franco <roberto@perez-franco.com>
+
+	* Version 7 beta-16: Fixed mutual inductance model.
+
+2023-06-10 Roberto Perez-Franco <roberto@perez-franco.com>
+
+	* Version 7 beta-18: Improved BODE and plotting.
+
+2023-06-12 Roberto Perez-Franco <roberto@perez-franco.com>
+
+	* Version 7 beta-19: Revised port analysis.
+
+2023-06-13 Roberto Perez-Franco <roberto@perez-franco.com>
+
+	* Version 7: Improved helper scripts and Final release.
+
+
 Copyright 1998-2008, Roberto Perez-Franco
 Copyright 2022 LdBeth
 Copyright 2023 Roberto Perez-Franco, LdBeth

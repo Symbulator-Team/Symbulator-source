@@ -1,7 +1,7 @@
 ()
 Prgm
 ClrIO
-7.→ok
+7→ok
 
 s\version()
 Disp "       Installing..."
@@ -19,10 +19,12 @@ s\menu()
 s\only(1)
 s\plot()
 s\port(cir,1,2)
-s\pr(1,2)
+s\pf(1)
+s\pr({1,2})
 s\s2t(1/s)
 s\sa()
 s\s3(ê,ω,µn1,µn2)
+s\sp(ê)
 s\s6(ê,ω)
 s\s8(ê,αζ1,αζ2,αζ3,αζ4,αζ5,ω)
 s\s7(αζ1,αζ2,αζ3,αζ4,αζ5,ω)
@@ -43,9 +45,13 @@ expr("Archive "&s\list)
 If getType(s\verbose)="NONE" Then
 true→s\verbose
 EndIf
+If getType(s\rms)="NONE" Then
+false→s\rms
+EndIf
 Lock s\ck,s\verbose
 DelVar ai,ap,av,ij1,ino,pj1,sj1,vth,zi,ir1,pr1,sr1,v0,v1,αpurpose
 0.→ok
+ClrIO
 DispHome
 Stop
 Lbl non

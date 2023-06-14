@@ -6,14 +6,18 @@ EndIf
 Local γv1,γv2,γi1,γi2
 Dialog
 Title "Enter in/out values"
-Request "In voltage",γv1
-Request "In current",γi1
-Request "Out voltage",γv2
-Request "Out current",γi2
+Request "In voltage",γv1,0
+Request "In current",γi1,0
+Request "Out voltage",γv2,0
+Request "Out current",γi2,0
 EndDlog
 If ok=0. Then
 Return 
 EndIf
+γv1→s\sit:s\si():s\sit→γv1
+γv2→s\sit:s\si():s\sit→γv2
+γi1→s\sit:s\si():s\sit→γi1
+γi2→s\sit:s\si():s\sit→γi2
 expr(γv2&"/"&γv1&"→Av")
 expr(γi2&"/"&γi1&"→Ai")
 real(–av*conj(ai))→ap

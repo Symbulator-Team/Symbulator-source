@@ -3,53 +3,35 @@ Prgm
 If ok=7. Then
 Return 
 EndIf
-Local αxmin,αxmax,αvar,αxvar
-If right(left(string(getConfg()),14),12)≠"Product Name" Then
+Local γv1,γv2,γi1,γi2
 Dialog
-Title "Notice!"
-Text "Symbulator requires you to"
-Text "set English as language in"
-Text "MODE. Sorry!"
-EndDlog
-3.→ok
-Return 
-EndIf
-DelVar y1,y2:ClrGraph:setMode("Complex Format","RECTANGULAR"):setMode("Angle","RADIAN"):setMode("Graph","FUNCTION"):setGraph("Axes","On"):setGraph("Labels","Off"):setGraph("Coordinates","Rect"):
-Lbl reenter
-Dialog
-Title "Plot"
-Request "Function f(t)",αxvar
-Request "Minimal time",αxmin
-Request "Maximal time",αxmax
+Title "Enter in/out values"
+Request "In voltage",γv1,0
+Request "In current",γi1,0
+Request "Out voltage",γv2,0
+Request "Out current",γi2,0
 EndDlog
 If ok=0. Then
 Return 
 EndIf
-DelVar t
-expr(αxvar)→αvar
-If string(αvar)=string(αvar|t=0) Then
-Dialog
-Title "Notice!"
-Text "Function is not a function"
-Text "of time. Time variable = t."
-Text "Please, enter it again."
-EndDlog
-Goto reenter
-EndIf
-expr(αxmin)→xmin
-expr(αxmax)→xmax
-If not (xmin<xmax) Then
-Dialog
-Title "Notice!"
-Text "Minimal time must be"
-Text "smaller than Maximal time."
-Text "Please, enter them again."
-EndDlog
-Goto reenter
-EndIf
-(xmax-xmin)/10→xscl
-expr("Define y1(x)="&string(αvar)&"|t=x")
-PlotsOff :PlotsOn 1:ZoomFit
-PxlText "űtime(sec)▶",68,3
-PxlText "ų",51,150:PxlText "e",44,150:PxlText "u",37,150:PxlText "u",37,150:PxlText "l",30,150:PxlText "a",21,150:PxlText "v",14,150:PxlText "Ų",8,150
+γv1→s\sit:s\si():s\sit→γv1
+γv2→s\sit:s\si():s\sit→γv2
+γi1→s\sit:s\si():s\sit→γi1
+γi2→s\sit:s\si():s\sit→γi2
+expr(γv2&"/"&γv1&"→Av")
+expr(γi2&"/"&γi1&"→Ai")
+real(–av*conj(ai))→ap
+expr(γv1&"/"&γi1&"→Zi")
+ClrIO
+Disp "Values Found"
+Disp "Press [ENTER] to see them."
+Disp "Voltage gain or Av"
+Pause av
+Disp "Current gain or Ai"
+Pause ai
+Disp "Power gain or Ap"
+Pause ap
+Disp "Input impedance or Zi"
+Pause zi
+DispHome
 EndPrgm

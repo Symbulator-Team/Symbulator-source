@@ -4,7 +4,10 @@ If ok=7. Then
 Return 
 EndIf
 startTmr()→s\ter
+
+true→αmetagat
 "Equival"→αpurpose
+
 If getType(s\verbose)="NONE" Then
 true→s\verbose
 EndIf
@@ -36,17 +39,25 @@ EndIf
 If s\toa="FD" Then
 3→δta
 EndIf
+Else
+Local ââ
+":"&â→ââ
+If inString(ââ,"")≠0 or inString(ââ,":c")≠0 or inString(ââ,":l")≠0 or inString(ââ,":m")≠0 or inString(ââ,":t")≠0 Then
+2→δtask
+EndIf
 EndIf
 DelVar s\toa
 
 If getType(δta)="NONE" Then
 Dialog
 Title "Equivalent Resistance/Impedance"
-DropDown "Type of Analysis",{"DC","AC","FD"},δta
+DropDown "Type of Analysis",{"DC","AC","FD"},δtask
 EndDlog
 If ok=0. Then
 Return 
 EndIf
+δtask→δta
+DelVar δtask
 EndIf
 
 true→s\select
@@ -68,22 +79,32 @@ s\s5(expr("["&û&"]"),1)
 DelVar βtool
 EndIf
 If δta=2 Then
+If inString(â,":c")=0 and inString(â,":l")=0 Then
+"ω"→δω
+Else
 If getType(s\ω)="STR" Then
 s\ω→δω
 DelVar s\ω
 Else
 Dialog
 Title "Enter radial frequency"
-Request "ω in rad/s",δω
+Request "ω in rad/s",δω,0
 EndDlog
 If ok=0. Then
 DelVar αpurpose
 Return 
 EndIf
+δω→s\sit:s\si():s\sit→δω
+EndIf
+EndIf
+
+If δω="" Then
+"ω"→δω
 EndIf
 expr(δω)→δω
-"jε1,"&µn2&","&µn1&",1,0;"&û→û
 "ac"→βtool
+
+"jε1,"&µn2&","&µn1&",1,0;"&û→û
 s\s5(expr("["&û&"]"),δω)
 DelVar βtool
 EndIf
@@ -120,7 +141,8 @@ EndIf
 EndIf
 DelVar δtc,δta,δω,dcir,αncc,αnec,αszc,αζ1,αζ2,αζ3,αζ4,αζ5
 s\s9()
-DelVar û,αmetagat
+DelVar û,αmetagat,zjε1
+
 If s\verbose Then
 Disp "Elapsed: "&string(checkTmr(exact(s\ter)))&" seconds."
 EndIf

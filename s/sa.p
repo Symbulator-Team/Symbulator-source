@@ -1,26 +1,63 @@
 ()
 Prgm
-If ok=7. Then
+If ok=7 Then
 Return 
 EndIf
-©=
-inString(αζanst," or ")→αorp
-If αorp≠0 Then
-left(αζanst,αorp-1)→αtbest
-mid(αζanst,αorp+4)→αtrest
-While inString(αtrest," or ")≠0
-inString(αtrest," or ")→αorp
-left(αtrest,αorp-1)→αtnext
-mid(αtrest,αorp+4)→αtrest
-If dim(αtnext)>dim(αtbest) Then
-αtnext→αtbest
+αζanst→αansrest
+""→αanspick
+""→αansall
+""→αanstest
+0→αanscoun
+DelVar αi,ασp,ασt
+expr(αuk1)→αuk1x
+dim(αuk1x)→αuk1c
+Loop
+instring(αansrest," or ")→αorp
+If αorp=0 Then
+αansrest→αanstest
+"Done"→αansrest
+Else
+left(αansrest,αorp-1)→αanstest
+mid(αansrest,αorp+4)→αansrest
 EndIf
-EndWhile
-αtrest→αtnext
-If dim(αtnext)>dim(αtbest) Then
-αtnext→αtbest
+If instring(αanstest,"=")≠0 and instring(αanstest,"@")=0 Then
+
+0→ασt
+For αi,1,αuk1c
+string(αuk1x[αi])→αiuk1
+If instring(αanstest,αiuk1)≠0 Then
+ασt+1→ασt
 EndIf
-αtbest→αζanst
+EndFor
+
+If ασt>0 Then
+αanscoun+1→αanscoun
+αansall&": Answer #"&string(αanscoun)&": "&αanstest&" "→αansall
+
+If αanspick="" Then
+αanstest→αanspick
+""→αanstest
+ασt→ασp
+
+Else
+
+If ασt>ασp Then
+αanstest→αanspick
+ασt→ασp
 EndIf
-DelVar αtbest,αtrest,αζact,αtnext,αorp
+""→αanstest
+0→ασt
+EndIf
+EndIf
+Else
+""→αanstest
+EndIf
+If αansrest="Done" Then
+αansrest
+Goto λend
+EndIf
+EndLoop
+Lbl λend
+DelVar αorp,αi,ασp,ασt,αiuk1,αuk1c,αuk1x
+
 EndPrgm

@@ -5,6 +5,10 @@ Return
 EndIf
 startTmr()→s\ttr
 
+If getType(αmetagat)="NONE" Then
+false→αmetagat
+EndIf
+
 If getType(s\verbose)="NONE" Then
 true→s\verbose
 EndIf
@@ -28,8 +32,10 @@ EndIf
 s\s5(expr("["&û&"]"),1)
 DelVar βtool
 s\s9()
-DelVar û,αmetagat
+DelVar û
+If s\verbose and not αmetagat Then
 Disp "Elapsed: "&string(checkTmr(exact(s\ttr)))&" seconds."
-DelVar s\ttr
+EndIf
+DelVar s\ttr,αmetagat
 DispHome
 EndPrgm

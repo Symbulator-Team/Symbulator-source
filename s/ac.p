@@ -6,7 +6,12 @@ Return
 EndIf
 
 startTmr()→s\tac
-
+If getType(s\rms)="NONE" Then
+false→s\rms
+EndIf
+If getType(αmetagat)="NONE" Then
+false→αmetagat
+EndIf
 If getType(s\verbose)="NONE" Then
 true→s\verbose
 EndIf
@@ -22,10 +27,14 @@ EndIf
 s\s5(expr("["&û&"]"),ω)
 DelVar βtool
 s\s9()
-DelVar αmetagat,û
-If s\verbose Then
+DelVar û
+If s\verbose and not αmetagat Then
 Disp "Elapsed: "&string(checkTmr(exact(s\tac)))&" seconds."
+If s\rms Then
+Disp "Solved assuming voltages &"
+Disp "currents are all in RMS."
 EndIf
-DelVar s\tac
+EndIf
+DelVar αmetagat,s\tac
 DispHome
 EndPrgm
