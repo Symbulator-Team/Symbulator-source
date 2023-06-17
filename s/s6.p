@@ -19,7 +19,6 @@ EndIf
 2→ζkip
 ©=
 If s\verbose and not αmetagat Then
-ClrIO
 Disp "Generating 1st level"
 Disp "equations and 2nd level"
 Disp "expressions."
@@ -70,7 +69,6 @@ expr("DelVar "&left(right(αuk1,αdunk1-1),αdunk1-2))
 ©=
 If βtool="ac" Then
 If s\verbose and not αmetagat Then
-ClrIO
 Disp "Generating 3rd level"
 Disp "expressions."
 EndIf
@@ -80,20 +78,37 @@ left(αζ1,1)→αζ11
 string(ê[αζ,2])→αζ2
 string(ê[αζ,3])→αζ3
 string(ê[αζ,4])→αζ4
-If inString("r,c,l,e,j",αζ11)≠0 Then
+If inString("e,j,r,c,l",αζ11)≠0 Then
+If s\rms Then
 expr("((v"&αζ2&")-(v"&αζ3&"))*(conj(i"&αζ1&"))→s"&αζ1)
+Else
+expr("((v"&αζ2&")-(v"&αζ3&"))*(conj(i"&αζ1&"))/2→s"&αζ1)
+EndIf
+If inString("e,j,r",αζ11)≠0 Then
+If s\rms Then
+expr("real(s"&αζ1&")→p"&αζ1)
+Else
+expr("real(s"&αζ1&")→ap"&αζ1)
 EndIf
 If inString("e,j",αζ11)≠0 Then
 expr("((v"&αζ2&")-(v"&αζ3&"))/(–i"&αζ1&")→z"&αζ1)
 EndIf
+EndIf
+EndIf
 If αζ11="o" Then
+If s\rms Then
 expr("(v"&αζ4&")*(conj(–i"&αζ1&"))→s"&αζ1)
+expr("real(s"&αζ1&")→p"&αζ1)
+Else
+expr("(v"&αζ4&")*(conj(–i"&αζ1&"))/2→s"&αζ1)
+expr("real(s"&αζ1&")→ap"&αζ1)
+EndIf
 EndIf
 EndFor
 EndIf
+©=
 If βtool="dc" Then
 If s\verbose and not αmetagat Then
-ClrIO
 Disp "Generating 3rd level"
 Disp "expressions."
 EndIf
@@ -118,7 +133,9 @@ EndIf
 If getType(αpurpose)="NONE" Then
 "Other"→αpurpose
 Goto ζ2
-ElseIf αpurpose="Expert" Then
+ElseIf αpurpose≠"Expert" Then
+Goto ζ2
+Else
 dim(αeql)→αdeql
 string(expr(left(αeql,αdeql-1)))→αeql
 
@@ -143,11 +160,7 @@ s\newcon→ζcon
 EndIf
 
 dim(αeql)→αdeql
-If getType(s\newequ)="STR" Then
-1→ζkip
-Else
-2→ζkip
-ClrIO
+If getType(s\newequ)≠"STR" Then
 Dialog
 Title "Expert Mode"
 Request "Add equations",αddequ
@@ -158,6 +171,8 @@ EndDlog
 If ok=0. Then
 Return 
 EndIf
+αddequ→s\sit:s\si():s\sit→αddequ
+αddcon→s\sit:s\si():s\sit→αddcon
 EndIf
 EndIf
 If getType(αddequ)="STR" Then
@@ -197,17 +212,12 @@ EndIf
 
 If ζkip≠1 Then
 αuk1→unknown
-left(αeql,dim(αeql)-1)→equation
-
-If getType(αddcon)="STR" Then
-If αddcon≠"" Then
-αddcon→wheneq
-EndIf
-EndIf
+left(αeql,dim(αeql))→equation
+ζcon→wheneq
 
 If ζkip=3 Then
 expr("DelVar "&αdl)
-DelVar v0,αdunk2,αdunk1,αdl,αeql,αuk2,αuk2v,αuk1v,αuk1,αszc,γζ,βζ0,Γζ0,δζ1,δζ2,tmp1,tmp2,tmp3,ζcon,αdeql,ζkip,ζki2,ζge3,αuk1α
+DelVar v0,αdunk2,αdunk1,αdl,αeql,αuk2,αuk2v,αuk1v,αuk1,αszc,γζ,βζ0,Γζ0,δζ1,δζ2,tmp1,tmp2,tmp3,ζcon,αdeql,ζkip,ζki2,ζge3,αuk1α,αpurpose
 2.→ok
 Return 
 EndIf
@@ -220,7 +230,6 @@ If αpurpose≠"Expert" Then
 false→s\select
 Else
 DelVar ψγ1,ψγ2
-ClrIO
 Dialog
 Title "Do you need all answers?"
 Text "Selecting wisely which answers to save"
@@ -240,7 +249,6 @@ EndIf
 EndIf
 EndIf
 If s\select and getType(s\savevars)="NONE" Then
-ClrIO
 Dialog
 Title "List the answers to save"
 Text "Please list the first and second level"
@@ -259,7 +267,6 @@ If getType(s\postpone)="NONE" Then
 If αpurpose≠"Expert" Then
 false→s\postpone
 Else
-ClrIO
 Dialog
 Title "Inverse Laplace"
 Text "Postponing the execution of the"
@@ -288,7 +295,6 @@ s\savevaro&","&right(s\savevars,dim(s\savevars)-1)→s\savevaro
 EndIf
 ©=
 If s\verbose and not αmetagat Then
-ClrIO
 Disp "Solving the system of all"
 Disp "1st level equations."
 If iµpaλa Then
@@ -299,15 +305,19 @@ EndIf
 If part(expr(αuk1))=1 Then
 left(right(αuk1,αdunk1-1),αdunk1-2)→αuk1
 If βtool="ac" Then
+©"cSolve("&string(expr(αeql))&","&αuk1&")"&ζcon→solvecmd
 expr("cSolve("&αeql&","&αuk1&")"&ζcon&"→αζans")
 Else
+©"solve("&string(expr(αeql))&","&αuk1&")"&ζcon→solvecmd
 expr("solve("&αeql&","&αuk1&")"&ζcon&"→αζans")
 EndIf
 "{"&αuk1&"}"→αuk1
 Else
 If βtool="ac" Then
+©"cSolve("&string(expr(αeql))&","&αuk1&")"&ζcon→solvecmd
 expr("cSolve("&αeql&","&αuk1&")"&ζcon&"→αζans")
 Else
+©"solve("&string(expr(αeql))&","&αuk1&")"&ζcon→solvecmd
 expr("solve("&αeql&","&αuk1&")"&ζcon&"→αζans")
 EndIf
 EndIf
@@ -315,8 +325,10 @@ EndIf
 DelVar αζval,αζvar,αζact,σΓsi
 ©=
 string(αζans)→αζanst
-If inString(αζanst,"=")=0 Then
-ClrIO
+©=
+s\sa()
+©=
+If αanscoun=0 Then
 Dialog
 Title "Error!"
 Text "Calculator failed to solve"
@@ -324,7 +336,6 @@ Text "the equations. If you used"
 Text "numeric values, try again"
 Text "using symbolic values only."
 EndDlog
-ClrIO
 Dialog
 Title "Variables"
 Text "Some vars were created in"
@@ -333,16 +344,21 @@ Text "useless. Please erase them."
 EndDlog
 4.→ok
 Return 
-EndIf
-©=
+Else
+expr(αanspick)→αζans
 If s\verbose and not αmetagat Then
-ClrIO
 Disp "Equation system solved!"
 EndIf
-©=
-s\sa()
-©=
-expr(αζanst)→αζans
+If αanscoun>1 Then
+αansall→solution
+If s\verbose and not αmetagat Then
+Disp string(αanscoun)&" solutions found. Saved as"
+Disp "a string for your reference."
+EndIf
+EndIf
+EndIf
+DelVar αanspick,αanstest,αansrest,αansall,αanscoun
+©
 If s\verbose and not αmetagat Then
 Disp "Storing 1st and 2nd level"
 Disp "answers."
@@ -416,7 +432,6 @@ dim(αuk1)→αdunk1
 EndIf
 ©=
 If βtool="tr" Then
-ClrIO
 If s\postpone Then
 If s\verbose Then
 Disp "Postponing inverse Laplace"
@@ -459,9 +474,6 @@ Disp "Finding inverse Laplace"
 Disp "transform of "&αukn2&"..."
 EndIf
 expr(string(dif\ilaplace(αuk2v[γζ],s))&"→"&αukn2)
-If s\verbose Then
-Disp "Done!"
-EndIf
 EndIf
 Else
 expr(string(αuk2v[γζ])&"→"&αukn2)
@@ -476,10 +488,10 @@ string(αuk1[γζ])→αukn1
 If s\select Then
 inString(s\savevaro,αukn1)→αζl
 If αζl=0 Then
-Goto αskunk1
+Goto αskunk1t
 Else
 If string(expr(s\savevaro))=string(expr(s\savevaro&"|"&αukn1&"=0")) Then
-Goto αskunk1
+Goto αskunk1t
 EndIf
 EndIf
 EndIf
@@ -498,12 +510,9 @@ Disp "Finding inverse Laplace"
 Disp "transform of "&αukn1&"..."
 EndIf
 expr(string(dif\ilaplace(αuk1v[γζ],s))&"→"&αukn1)
-If s\verbose Then
-Disp "Done!"
 EndIf
 EndIf
-EndIf
-Lbl αskunk1
+Lbl αskunk1t
 EndFor
 If s\verbose and not s\postpone Then
 Disp "Inverse Laplace took "&string(checkTmr(s\til))&"s"
@@ -513,35 +522,67 @@ EndIf
 
 If iµpaλa and not (βtool="tr") Then
 For γζ,1,αdunk1
+string(αuk1[γζ])→αukn1
+If s\select Then
+inString(s\savevaro,αukn1)→αζl
+If αζl=0 Then
+Goto αskunk1f
+Else
+If string(expr(s\savevaro))=string(expr(s\savevaro&"|"&αukn1&"=0")) Then
+Goto αskunk1f
+EndIf
+EndIf
+EndIf
+If inString(αuk1α,αukn1)=0 Then
+αuk1v[γζ]→#αukn1
+Else
 expr(string(αuk1v[γζ])&"→"&αukn1)
+EndIf
+Lbl αskunk1f
 EndFor
 EndIf
 ©=
-If βtool="ac" Then
+If βtool="ac" and not s\select Then
 If s\verbose and not αmetagat Then
-ClrIO
 Disp "Refreshing 3rd level"
 Disp "expressions."
 EndIf
 For αζ,1,αnec
 string(ê[αζ,1])→αζ1
+left(αζ1,1)→αζ11
 string(ê[αζ,2])→αζ2
 string(ê[αζ,3])→αζ3
 string(ê[αζ,4])→αζ4
-left(αζ1,1)→αζ11
-If inString("r,c,l,e,j",αζ11)≠0 Then
+If inString("e,j,r,c,l",αζ11)≠0 Then
+If s\rms Then
 expr("((v"&αζ2&")-(v"&αζ3&"))*(conj(i"&αζ1&"))→s"&αζ1)
+Else
+expr("((v"&αζ2&")-(v"&αζ3&"))*(conj(i"&αζ1&"))/2→s"&αζ1)
+EndIf
+If inString("e,j,r",αζ11)≠0 Then
+If s\rms Then
+expr("real(s"&αζ1&")→p"&αζ1)
+Else
+expr("real(s"&αζ1&")→ap"&αζ1)
 EndIf
 If inString("e,j",αζ11)≠0 Then
-expr("((v"&αζ2&")-(v"&αζ3&"))/(–i"&αζ1&")→r"&αζ1)
+expr("((v"&αζ2&")-(v"&αζ3&"))/(–i"&αζ1&")→z"&αζ1)
+EndIf
+EndIf
 EndIf
 If αζ11="o" Then
+If s\rms Then
 expr("(v"&αζ4&")*(conj(–i"&αζ1&"))→s"&αζ1)
+expr("real(s"&αζ1&")→p"&αζ1)
+Else
+expr("(v"&αζ4&")*(conj(–i"&αζ1&"))/2→s"&αζ1)
+expr("real(s"&αζ1&")→ap"&αζ1)
+EndIf
 EndIf
 EndFor
 EndIf
 
 expr("DelVar "&αdl)
-DelVar αdunk2,αdunk1,αdl,αeql,αuk2,αuk2v,αuk1v,αuk1,αszc,γζ,βζ0,Γζ0,δζ1,δζ2,tmp1,tmp2,tmp3,ζcon,αukn1,αukn2,ζge3,s\postpone,s\select,s\savevars,s\savevara,s\savevari,s\svvarin,s\svvaran,αpurpose,αuk1α,αζl,s\savevaro,αζanst,αuk1α,ζkip,s\newequ,s\newunk,s\newcon,αddcon,αddequ,αddunk
+DelVar αdunk2,αdunk1,αdl,αeql,αuk2,αuk2v,αuk1v,αuk1,αszc,γζ,βζ0,Γζ0,δζ1,δζ2,tmp1,tmp2,tmp3,ζcon,αukn1,αukn2,ζge3,s\postpone,s\select,s\savevars,s\savevara,s\savevari,s\svvarin,s\svvaran,αpurpose,αuk1α,αζl,s\savevaro,αζanst,αuk1α,ζkip,s\newequ,s\newunk,s\newcon,αddcon,αddequ,αddunk,µutual
 2.→ok
 EndPrgm
