@@ -1,6 +1,6 @@
 (ê,αζ1,αζ2,αζ3,αζ4,αζ5,ω)
 Prgm
-If ok=7 Then
+If ok=7. Then
 Return 
 EndIf
 DelVar ζζflag
@@ -31,7 +31,7 @@ EndIf
 EndFor
 EndIf
 If ζζflag Then
-expr("cSolve((v"&αζ2&"-v"&αζ3&")=("&αζ4&")*(i"&αζ1&")+("&ζζ&"),i"&αζ1&")→eq"&αζ1)
+expr("(v"&αζ2&"-v"&αζ3&")=("&αζ4&")*(i"&αζ1&")+("&ζζ&")→eq"&αζ1)
 αeql&"eq"&αζ1&" and "→αeql
 αdl&"eq"&αζ1&","→αdl
 αuk1&"i"&αζ1&","→αuk1
@@ -67,8 +67,6 @@ If αζ11="e" Then
 expr(αζ4&"→v"&αζ1)
 If αζ4≠"0" Then
 expr("(v"&αζ2&"-"&"v"&αζ3&")=("&αζ4&")→eq"&αζ1)
-EndIf
-
 αeql&"eq"&αζ1&" and "→αeql
 αdl&"eq"&αζ1&","→αdl
 If αζ2≠"0" and expr("getType(Γζ"&αζ2&")")="NONE" Then
@@ -94,6 +92,7 @@ If αζ3≠"0" and instring(αuk1,"v"&αζ3)=0 Then
 αuk1&"v"&αζ3&","→αuk1
 EndIf
 αuk1&"i"&αζ1&","→αuk1
+EndIf
 EndIf
 If left(αζ1,1)="j" Then
 If iµpaλa=true Then
@@ -129,7 +128,7 @@ If βtool="dc" Then
 If αζ11="c" and αζ4≠"0" Then
 expr("0→i"&αζ1)
 EndIf
-If instring("r,l,c,e",αζ11)≠0 and αζ4="0" or αζ11="l" and βtool="dc" or αζ11="s" Then
+If instring("r,l,c,e",αζ11)≠0 and αζ4="0" or αζ11="l" or αζ11="s" Then
 expr("(v"&αζ2&"-"&"v"&αζ3&")=0→eq"&αζ1)
 αeql&"eq"&αζ1&" and "→αeql
 αdl&"eq"&αζ1&","→αdl
@@ -268,9 +267,9 @@ EndFor
 EndIf
 If ζζflag Then
 If βtool="fd" or βtool="tr" Then
-expr("solve((v"&αζ2&"-v"&αζ3&")/s=("&αζ4&")*(i"&αζ1&"-("&αζ5&")/s)+("&ζζ&"),i"&αζ1&")→eq"&αζ1)
+expr("(v"&αζ2&"-v"&αζ3&")/s=("&αζ4&")*(i"&αζ1&"-("&αζ5&")/s)+("&ζζ&")→eq"&αζ1)
 ElseIf βtool="ac" Then
-expr("cSolve((v"&αζ2&"-v"&αζ3&")/(ω*)=("&αζ4&")*(i"&αζ1&")+("&ζζ&"),i"&αζ1&")→eq"&αζ1)
+expr("(v"&αζ2&"-v"&αζ3&")/(ω*)=("&αζ4&")*(i"&αζ1&")+("&ζζ&")→eq"&αζ1)
 EndIf
 αeql&"eq"&αζ1&" and "→αeql
 αdl&"eq"&αζ1&","→αdl
