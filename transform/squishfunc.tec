@@ -1,0 +1,26 @@
+! Assume buffer content is the file name without extension !
+
+0,128ET      ! Abort on error !
+
+EO - 200 "L
+    @^A/Macro requires TECO version 200+/ 13^T 10^T ^C
+'
+Z            !! Error if no file name
+"E
+    :@^A/Specify file name with --text or -T option/ ^C
+'
+hXa bJ       !! copy to @A
+@FS/.f/.txt/ !! Replace the file extension
+hXb hK       !! save to @B
+@EW/^EQb/    !! specify write to file.txt
+@ER/^EQa/ Y  !! read from file.f
+@S/Func/     !! locate function body
+
+<L
+! Loop til EndFunc !
+@::S/EndFunc/:;
+-D@I/:/   ! Join lines !
+>
+
+EX  ! bye !
+^[^[

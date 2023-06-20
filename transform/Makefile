@@ -13,3 +13,8 @@ clean:
 
 %.TIString: ../s/%.s
 	$(XSLT) "-a:on" "-s:build.xml" "-o:$@" "file=$<" "type=String"
+
+teco: squishfunc.tes squishprog.tes
+
+%.tes: %.tec
+	teco -T $< -A 31 -E squish -X > $@

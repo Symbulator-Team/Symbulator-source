@@ -1,0 +1,3 @@
+()
+Prgm:If ok=7 Then:Return :EndIf:If s\verbose Then:Disp "Setting old modes.":EndIf:setMode(αζmode):DelVar αζmode:DispHome
+EndPrgm
