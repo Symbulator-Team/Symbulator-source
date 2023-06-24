@@ -4,6 +4,8 @@ If ok=7 Then
 Return 
 EndIf
 
+Local αζ,αζg,αζω,αζn1,αζn2,αζ5t,αζ11,αζ1,αζ2,αζ3,αζ4,αζ11,αζdp
+
 0→αζg
 0→αζn1
 0→αζn2
@@ -138,5 +140,4 @@ EndDlog
 EndIf
 EndIf
 
-DelVar αζ,αζg,αζω,αζn1,αζn2,αζ5t,αζ11,αζ1,αζ2,αζ3,αζ4,αζ11,αζdp
 EndPrgm

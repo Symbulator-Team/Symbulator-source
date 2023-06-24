@@ -3,6 +3,9 @@ Prgm
 If ok=7 Then
 Return 
 EndIf
+
+Local τξelo,τξflo,τξlef,τξlen,τξslo,τξfil,τξnfz,τξele,τξend,τξedd,τξedm,τξedn,τξeds,τξelg,τξx
+
 ":"&τξeli→τξele
 0→τξx
 5-τξnte→τξnfz
@@ -18,9 +21,6 @@ EndIf
 
 1→τξflo
 While instring(ç,τξele,τξflo)≠0
-If ok=3 Then
-Goto aus
-EndIf
 dim(ç)→τξlen
 instring(ç,τξele,τξflo)+1→τξelo
 If instring(ç,":",τξelo)≠0 Then
@@ -53,20 +53,12 @@ Text "exactly "&string(τξnte)&" terms are expected for a "&left(string(τξedn
 Text "Please fix this element's description."
 EndDlog
 3→ok
-Goto aus
+Exit
 EndIf
 
 If τξx=1 Then
-Goto aus
+Exit
 EndIf
 
 EndWhile
-
-Lbl aus
-DelVar τξelo,τξflo,τξlef,τξlen,τξslo,τξfil,τξnfz,τξele,τξend,τξedd,τξedm,τξedn,τξeds,τξelg,τξx
-
-If ok=3 Then
-Return 
-EndIf
-
 EndPrgm

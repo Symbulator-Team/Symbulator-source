@@ -67,6 +67,10 @@
 
 	* s8.p: Fix zero volt voltage source solve error.
 
+2023-06-24 LdBeth <ldbeth@sdf.org>
+
+	* Cleaned some structural programming issue.
+
 
 Copyright 1998-2008, Roberto Perez-Franco
 Copyright 2022 LdBeth

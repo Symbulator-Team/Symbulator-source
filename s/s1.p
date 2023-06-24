@@ -1,5 +1,7 @@
 ()
 Prgm
+Local τξeds,τξelg,τξelo,τξflo,τξlen,τξslo
+
 If ok=7 Then
 Return 
 EndIf
@@ -28,7 +30,4 @@ EndDlog
 EndIf
 
 EndWhile
-
-DelVar τξeds,τξelg,τξelo,τξflo,τξlen,τξslo
-
 EndPrgm

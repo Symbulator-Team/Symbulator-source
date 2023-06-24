@@ -111,7 +111,7 @@ Return
 EndIf
 
 s\s4(expr("["&û&"]"))
-DelVar çlen,ç,u
+DelVar çlen,ç
 
 Else
 ClrIO
