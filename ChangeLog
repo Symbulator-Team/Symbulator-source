@@ -71,6 +71,9 @@
 
 	* Cleaned some structural programming issue.
 
+2023-07-08 Roberto Perez-Franco <roberto@perez-franco.com>
+
+	* s5.p: Fix a transient bug.
 
 Copyright 1998-2008, Roberto Perez-Franco
 Copyright 2022 LdBeth
